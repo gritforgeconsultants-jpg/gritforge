@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="GritForge — Structural Steel Estimating & Bid Support. Fast, defensible bids built for the real world." />
+  <title>GritForge | Structural Steel Estimating & Bid Support</title>
+
+  <style>
+    :root{
+      /* GritForge feel: dark steel + forge ember */
+      --bg: #0b0d10;
+      --panel: rgba(255,255,255,.04);
+      --panel-2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+      --line: rgba(255,255,255,.10);
+      --line2: rgba(255,255,255,.14);
+
+      /* Rust/brick red accent (matches "forge ember" vibe) */
+      --accent: #a33b2b;
+      --accent2: #d0573f;
+      --accentGlow: rgba(163,59,43,.35);
+
+      --shadow: 0 18px 40px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 28px;
+
+      --max: 1120px;
+      --pad: 22px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(163,59,43,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 20%, rgba(208,87,63,.10), transparent 60%),
+        radial-gradient(1000px 700px at 50% 85%, rgba(255,255,255,.06), transparent 62%),
+        linear-gradient(180deg, #07080a, #0b0d10 40%, #07080a);
+      overflow-x:hidden;
+    }
+
+    /* subtle grit */
+    .noise{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      opacity:.10;
+      mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      background-size: 240px 240px;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* top bar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,8,10,.62);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 180px;
+    }
+    .mark{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(163,59,43,.95), rgba(208,87,63,.55)),
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 55%);
+      box-shadow: 0 10px 22px rgba(163,59,43,.28);
+      border: 1px solid rgba(255,255,255,.14);
+      position:relative;
+    }
+    .mark:after{
+      content:"";
+      position:absolute;
+      inset:7px;
+      border-radius:8px;
+      border: 1px solid rgba(255,255,255,.14);
+      transform: rotate(6deg);
+    }
+    .brand h1{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .brand .sub{
+      display:block;
+      font-size: 12px;
+      letter-spacing:.08em;
+      color: var(--muted2);
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 650;
+      letter-spacing:.02em;
+      transition: .2s ease;
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+    }
+    .btn.primary{
+      border-color: rgba(163,59,43,.45);
+      background:
+        linear-gradient(135deg, rgba(163,59,43,.92), rgba(208,87,63,.62));
+      box-shadow: 0 18px 42px rgba(163,59,43,.20);
+    }
+    .btn.primary:hover{
+      box-shadow: 0 22px 52px rgba(163,59,43,.28);
+    }
+
+    /* hero */
+    header.hero{
+      padding: 72px 0 26px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.12em;
+      color: var(--muted2);
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      width: fit-content;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(208,87,63,.12);
+    }
+
+    .hero h2{
+      margin: 18px 0 10px;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .hero h2 span{
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 0 18px rgba(163,59,43,.22);
+    }
+
+    .lead{
+      margin: 14px 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+      max-width: 560px;
+    }
+    .stat{
+      padding: 14px 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .stat b{
+      display:block;
+      font-size: 13px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.86);
+    }
+    .stat span{
+      display:block;
+      margin-top: 6px;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(500px 220px at 70% 18%, rgba(163,59,43,.22), transparent 62%),
+        radial-gradient(420px 240px at 20% 85%, rgba(255,255,255,.08), transparent 65%);
+      pointer-events:none;
+    }
+    .panel-inner{
+      position:relative;
+      padding: 18px;
+    }
+
+    .card-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .card-title h3{
+      margin:0;
+      font-size: 13px;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.86);
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(163,59,43,.32);
+      background: rgba(163,59,43,.10);
+      color: rgba(255,255,255,.82);
+      white-space:nowrap;
+    }
+
+    .deliverables{
+      list-style:none;
+      margin: 12px 0 0;
+      padding:0;
+      display:grid;
+      gap: 10px;
+    }
+    .deliverables li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+    .check{
+      width: 18px; height: 18px;
+      border-radius: 6px;
+      margin-top: 2px;
+      background: rgba(163,59,43,.22);
+      border: 1px solid rgba(163,59,43,.40);
+      box-shadow: 0 0 0 6px rgba(163,59,43,.10);
+      flex: 0 0 18px;
+      position:relative;
+    }
+    .check:after{
+      content:"";
+      position:absolute;
+      left: 5px;
+      top: 4px;
+      width: 6px;
+      height: 9px;
+      border-right: 2px solid rgba(255,255,255,.88);
+      border-bottom: 2px solid rgba(255,255,255,.88);
+      transform: rotate(36deg);
+    }
+    .deliverables b{
+      display:block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .deliverables span{
+      display:block;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height:1.35;
+    }
+
+    /* sections */
+    section{
+      padding: 26px 0;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+    .section-head h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.01em;
+    }
+    .section-head p{
+      margin:0;
+      color: var(--muted2);
+      max-width: 60ch;
+      line-height: 1.5;
+      font-size: 13.5px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .box{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 16px;
+    }
+    .box h4{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing:.02em;
+    }
+    .box p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .how{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .step{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(380px 180px at 35% 0%, rgba(163,59,43,.16), transparent 62%);
+      pointer-events:none;
+    }
+    .step > div{ position:relative; }
+    .num{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.12em;
+      color: rgba(255,255,255,.80);
+      text-transform: uppercase;
+    }
+    .step h4{
+      margin: 8px 0 6px;
+      font-size: 15px;
+    }
+    .step p{
+      margin: 0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .callout{
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+      padding: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(163,59,43,.22);
+      background:
+        radial-gradient(700px 240px at 18% 0%, rgba(163,59,43,.18), transparent 62%),
+        rgba(255,255,255,.03);
+      box-shadow: 0 18px 44px rgba(0,0,0,.40);
+    }
+    .callout .seal{
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: rgba(163,59,43,.15);
+      border: 1px solid rgba(163,59,43,.30);
+      box-shadow: 0 0 0 8px rgba(163,59,43,.08);
+      flex: 0 0 44px;
+      position:relative;
+    }
+    .callout .seal:after{
+      content:"GF";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family: var(--mono);
+      font-weight: 800;
+      letter-spacing:.12em;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+    }
+    .callout h4{
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+    .callout p{
+      margin:0;
+      color: var(--muted2);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    /* contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    .contact .box{
+      height: 100%;
+    }
+
+    .contact-details{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      font-size: 13px;
+    }
+    .row span{ color: var(--muted2); }
+    .row b{ font-family: var(--mono); font-weight: 700; letter-spacing: .03em; }
+
+    footer{
+      padding: 22px 0 40px;
+      color: var(--muted2);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+    }
+    .foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .foot .motto{
+      font-family: var(--mono);
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .how{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      nav{ display:none; } /* keep it clean on mobile */
+    }
+    @media (prefers-reduced-motion: reduce){
+      .btn:hover{ transform:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="GritForge Home">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <h1>GRITFORGE <span class="sub">Bid Support</span></h1>
+          </div>
+        </a>
+
+        <nav aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#deliverables">Deliverables</a>
+          <a href="#how">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="btn primary" href="#contact">
+          Start a Conversation
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="dot" aria-hidden="true"></span> Structural Steel Estimating & Bid Support</div>
+
+            <h2><span>Fast.</span> Defensible. <br/>Built for the real world.</h2>
+
+            <p class="lead">
+              I help steel contractors and general contractors submit clean, accurate bids when volume spikes and deadlines tighten.
+              No fluff. No guesswork. Just solid estimating.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+              <a class="btn" href="#services">See what’s included</a>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <b>Delivery</b>
+                <span>Submission-ready notes, line items, and protections</span>
+              </div>
+              <div class="stat">
+                <b>Focus</b>
+                <span>Commercial steel: scope clarity, speed, and defense</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Bid Package Snapshot">
+            <div class="panel-inner">
+              <div class="card-title">
+                <h3>Bid Package</h3>
+                <span class="badge">Pay-per-bid</span>
+              </div>
+
+              <ul class="deliverables" id="deliverables">
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Scope Extraction</b>
+                    <span>Plan review + steel scope breakdown built to avoid misses</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Line Items</b>
+                    <span>GC-ready structure with clear descriptions and coverage</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Assumptions & Exclusions</b>
+                    <span>Written to protect you through revisions and follow-ups</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Notes That Stand Up</b>
+                    <span>Clarity that holds under review, RFI, and schedule pressure</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>What I Do</h3>
+            <p>Per-bid estimating support for commercial steel — built to move fast without missing scope.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box">
+            <h4>Overflow Estimating</h4>
+            <p>When bids stack up, I carry the workload so your submissions stay on time and clean.</p>
+          </div>
+          <div class="box">
+            <h4>Scope Clarity</h4>
+            <p>Extract steel scope from plans, isolate outliers, and keep responsibilities defined.</p>
+          </div>
+          <div class="box">
+            <h4>Defensible Packages</h4>
+            <p>Line items + assumptions/exclusions written to reduce risk and cut rework.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Who This Is For</h3>
+            <p>GritForge supports teams handling multiple bids per week — without hiring full-time.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box">
+            <h4>Steel Fabricators & Erectors</h4>
+            <p>Bid volume grows faster than headcount. I help you keep pace.</p>
+          </div>
+          <div class="box">
+            <h4>GCs With Steel Scope</h4>
+            <p>Need steel estimates that won’t collapse under review or revisions.</p>
+          </div>
+          <div class="box">
+            <h4>Busy Estimators</h4>
+            <p>When the schedule tightens, you need clean support — not added chaos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>How It Works</h3>
+            <p>Simple process. Clear inputs. Clean outputs.</p>
+          </div>
+        </div>
+
+        <div class="how">
+          <div class="step">
+            <div>
+              <div class="num">Step 01</div>
+              <h4>Send plans + due date</h4>
+              <p>You provide plan set, scope expectations, and submission deadline.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <div class="num">Step 02</div>
+              <h4>I build the bid</h4>
+              <p>Scope extraction, line items, and protections assembled for submission.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <div class="num">Step 03</div>
+              <h4>You submit</h4>
+              <p>Receive a clean, ready-to-send package — no extra translation required.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout" aria-label="Workflow Note">
+          <div class="seal" aria-hidden="true"></div>
+          <div>
+            <h4>How I work</h4>
+            <p>
+              I use a proprietary bid workflow developed from real projects, real revisions, and real awarded work.
+              You don’t need the system — you get the results.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Pricing</h3>
+            <p>Pricing is per bid and based on scope and complexity. You get a clear number up front.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box">
+            <h4>Pay-per-bid</h4>
+            <p>No subscriptions. No long contracts. Use support when you need it.</p>
+          </div>
+          <div class="box">
+            <h4>Defined up front</h4>
+            <p>After scope + timeline review, you get a clean number before work begins.</p>
+          </div>
+          <div class="box">
+            <h4>No surprises</h4>
+            <p>Clear scope coverage, clear deliverables, clear expectations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Contact</h3>
+            <p>If you need reliable estimating help on steel bids, reach out.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="box">
+            <h4 style="margin-top:0;">Let’s talk</h4>
+            <p style="margin:0;color:var(--muted2);line-height:1.5;">
+              Send the plan set (or invite link), the due date, and a short note on project type. I’ll reply with next steps.
+            </p>
+
+            <div class="contact-details">
+              <div class="row">
+                <span>Email</span>
+                <b><a href="mailto:arron@gritforge.com">arron@gritforge.com</a></b>
+              </div>
+              <div class="row">
+                <span>Region</span>
+                <b>Central Texas</b>
+              </div>
+              <div class="row">
+                <span>Support</span>
+                <b>Remote Available</b>
+              </div>
+            </div>
+
+            <div class="hero-actions" style="margin-top:14px;">
+              <a class="btn primary" href="mailto:arron@gritforge.com?subject=Steel%20Bid%20Support%20Request&body=Project%20name%3A%0D%0ABid%20due%20date%3A%0D%0AProject%20type%3A%0D%0APlan%20set%20link%2Fattachment%3A%0D%0ANotes%3A">
+                Email Arron <span aria-hidden="true">→</span>
+              </a>
+              <a class="btn" href="#services">Review services</a>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="card-title">
+                <h3>Operating Motto</h3>
+                <span class="badge">GritForge</span>
+              </div>
+              <p style="margin:10px 0 0;color:var(--muted);line-height:1.55;">
+                Built to carry the load when it matters.
+              </p>
+              <div style="height:10px"></div>
+              <p style="margin:0;color:var(--muted2);line-height:1.55;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;">
+                Forged by experience. Refined by discipline.
+              </p>
+
+              <div style="height:14px"></div>
+
+              <div class="box" style="background:rgba(0,0,0,.18);">
+                <h4 style="margin:0 0 8px;">Working style</h4>
+                <p style="margin:0;">
+                  Calm, clean, and defensible. If something needs more data, it gets flagged immediately — no silent guessing.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:9px;"></div>
+              <div>
+                <div style="font-weight:800;letter-spacing:.22em;text-transform:uppercase;">GritForge</div>
+                <div style="color:var(--muted2);font-size:12px;">Structural Steel Estimating & Bid Support</div>
+              </div>
+            </div>
+          </div>
+          <div class="motto">Built for the real world</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
