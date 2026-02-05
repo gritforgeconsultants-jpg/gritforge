@@ -6,32 +6,29 @@
   <meta name="description" content="GritForge — Steel & Wood Framing Estimating & Bid Support for commercial and large residential projects. Fast, defensible bids built for the real world." />
   <title>GritForge | Steel & Wood Estimating & Bid Support</title>
 
-  <style>
+    <style>
     :root{
-      /* GritForge feel: dark steel + forge ember */
-      --bg: #0b0d10;
-      --panel: rgba(255,255,255,.04);
-      --panel-2: rgba(255,255,255,.06);
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --line: rgba(255,255,255,.10);
-      --line2: rgba(255,255,255,.14);
+      --bg: #0e0f11;
+      --panel: #16181c;
+      --panel-2: #1b1e22;
+      --text: #e6e6e6;
+      --muted: #9aa0a6;
+      --muted2: #7f848b;
+      --line: #23262b;
+      --line2: #2b2f35;
 
-      /* Rust/brick red accent (matches "forge ember" vibe) */
-      --accent: #a33b2b;
-      --accent2: #d0573f;
-      --accentGlow: rgba(163,59,43,.35);
+      --accent: #8f3a2b;
+      --accent2: #a1442f;
 
-      --shadow: 0 18px 40px rgba(0,0,0,.55);
-      --radius: 18px;
-      --radius2: 28px;
+      --shadow: 0 6px 12px rgba(0,0,0,.35);
+      --radius: 6px;
+      --radius2: 8px;
 
       --max: 1120px;
       --pad: 22px;
 
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --sans: "Arial Narrow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
 
     *{ box-sizing:border-box; }
@@ -41,23 +38,8 @@
       margin:0;
       font-family: var(--sans);
       color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(163,59,43,.18), transparent 55%),
-        radial-gradient(900px 500px at 85% 20%, rgba(208,87,63,.10), transparent 60%),
-        radial-gradient(1000px 700px at 50% 85%, rgba(255,255,255,.06), transparent 62%),
-        linear-gradient(180deg, #07080a, #0b0d10 40%, #07080a);
+      background: var(--bg);
       overflow-x:hidden;
-    }
-
-    /* subtle grit */
-    .noise{
-      pointer-events:none;
-      position:fixed;
-      inset:0;
-      opacity:.10;
-      mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-      background-size: 240px 240px;
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -68,8 +50,7 @@
       position:sticky;
       top:0;
       z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,8,10,.62);
+      background: #0c0d0f;
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
@@ -89,21 +70,17 @@
     .mark{
       width: 34px;
       height: 34px;
-      border-radius: 10px;
-      background:
-        linear-gradient(135deg, rgba(163,59,43,.95), rgba(208,87,63,.55)),
-        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 55%);
-      box-shadow: 0 10px 22px rgba(163,59,43,.28);
-      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 6px;
+      background: var(--accent);
+      border: 1px solid #b35745;
       position:relative;
     }
     .mark:after{
       content:"";
       position:absolute;
       inset:7px;
-      border-radius:8px;
-      border: 1px solid rgba(255,255,255,.14);
-      transform: rotate(6deg);
+      border-radius:4px;
+      border: 1px solid rgba(255,255,255,.12);
     }
     .brand h1{
       margin:0;
@@ -132,14 +109,13 @@
       font-size: 13px;
       color: var(--muted);
       padding: 8px 10px;
-      border-radius: 10px;
+      border-radius: 6px;
       border: 1px solid transparent;
-      transition: .2s ease;
     }
     nav a:hover{
       color: var(--text);
-      border-color: rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      border-color: var(--line2);
+      background: var(--panel);
     }
 
     .btn{
@@ -147,29 +123,23 @@
       align-items:center;
       gap:10px;
       padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border-radius: 6px;
+      border: 1px solid var(--line2);
+      background: var(--panel);
       color: var(--text);
       font-weight: 650;
       letter-spacing:.02em;
-      transition: .2s ease;
-      box-shadow: 0 10px 22px rgba(0,0,0,.22);
       white-space:nowrap;
     }
     .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
+      border-color: #343a41;
     }
     .btn.primary{
-      border-color: rgba(163,59,43,.45);
-      background:
-        linear-gradient(135deg, rgba(163,59,43,.92), rgba(208,87,63,.62));
-      box-shadow: 0 18px 42px rgba(163,59,43,.20);
+      border-color: #b35745;
+      background: var(--accent);
     }
     .btn.primary:hover{
-      box-shadow: 0 22px 52px rgba(163,59,43,.28);
+      border-color: #c1624d;
     }
 
     /* hero */
@@ -194,16 +164,15 @@
       color: var(--muted2);
       text-transform: uppercase;
       padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
+      border-radius: 6px;
+      border: 1px solid var(--line2);
+      background: var(--panel);
       width: fit-content;
     }
     .dot{
       width: 8px; height: 8px;
-      border-radius: 50%;
+      border-radius: 2px;
       background: var(--accent2);
-      box-shadow: 0 0 0 6px rgba(208,87,63,.12);
     }
 
     .hero h2{
@@ -211,10 +180,10 @@
       font-size: clamp(34px, 4vw, 52px);
       line-height: 1.02;
       letter-spacing: -0.02em;
+      font-weight: 800;
     }
     .hero h2 span{
-      color: rgba(255,255,255,.96);
-      text-shadow: 0 0 18px rgba(163,59,43,.22);
+      color: var(--text);
     }
 
     .lead{
@@ -242,15 +211,15 @@
     .stat{
       padding: 14px 14px;
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line2);
+      background: var(--panel);
     }
     .stat b{
       display:block;
       font-size: 13px;
       letter-spacing:.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.86);
+      color: var(--text);
     }
     .stat span{
       display:block;
@@ -262,20 +231,10 @@
 
     .panel{
       border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      border: 1px solid var(--line2);
+      background: var(--panel);
       position:relative;
       overflow:hidden;
-    }
-    .panel:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(500px 220px at 70% 18%, rgba(163,59,43,.22), transparent 62%),
-        radial-gradient(420px 240px at 20% 85%, rgba(255,255,255,.08), transparent 65%);
-      pointer-events:none;
     }
     .panel-inner{
       position:relative;
@@ -294,7 +253,7 @@
       font-size: 13px;
       letter-spacing:.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.86);
+      color: var(--text);
     }
     .badge{
       font-family: var(--mono);
@@ -302,10 +261,10 @@
       letter-spacing:.10em;
       text-transform: uppercase;
       padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(163,59,43,.32);
-      background: rgba(163,59,43,.10);
-      color: rgba(255,255,255,.82);
+      border-radius: 6px;
+      border: 1px solid #6f2e23;
+      background: #3a1d17;
+      color: var(--text);
       white-space:nowrap;
     }
 
@@ -321,17 +280,16 @@
       gap: 10px;
       align-items:flex-start;
       padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: #121417;
     }
     .check{
       width: 18px; height: 18px;
-      border-radius: 6px;
+      border-radius: 3px;
       margin-top: 2px;
-      background: rgba(163,59,43,.22);
-      border: 1px solid rgba(163,59,43,.40);
-      box-shadow: 0 0 0 6px rgba(163,59,43,.10);
+      background: #3a1d17;
+      border: 1px solid #6f2e23;
       flex: 0 0 18px;
       position:relative;
     }
@@ -389,8 +347,8 @@
     }
     .box{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line2);
+      background: var(--panel);
       padding: 16px;
     }
     .box h4{
@@ -412,25 +370,18 @@
     }
     .step{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line2);
+      background: var(--panel);
       padding: 16px;
       position:relative;
       overflow:hidden;
-    }
-    .step:before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background: radial-gradient(380px 180px at 35% 0%, rgba(163,59,43,.16), transparent 62%);
-      pointer-events:none;
     }
     .step > div{ position:relative; }
     .num{
       font-family: var(--mono);
       font-size: 12px;
       letter-spacing:.12em;
-      color: rgba(255,255,255,.80);
+      color: var(--muted);
       text-transform: uppercase;
     }
     .step h4{
@@ -450,19 +401,15 @@
       align-items:flex-start;
       padding: 16px;
       border-radius: var(--radius2);
-      border: 1px solid rgba(163,59,43,.22);
-      background:
-        radial-gradient(700px 240px at 18% 0%, rgba(163,59,43,.18), transparent 62%),
-        rgba(255,255,255,.03);
-      box-shadow: 0 18px 44px rgba(0,0,0,.40);
+      border: 1px solid #6f2e23;
+      background: #151619;
     }
     .callout .seal{
       width: 44px;
       height: 44px;
-      border-radius: 16px;
-      background: rgba(163,59,43,.15);
-      border: 1px solid rgba(163,59,43,.30);
-      box-shadow: 0 0 0 8px rgba(163,59,43,.08);
+      border-radius: 6px;
+      background: #3a1d17;
+      border: 1px solid #6f2e23;
       flex: 0 0 44px;
       position:relative;
     }
@@ -510,9 +457,9 @@
       justify-content:space-between;
       gap: 12px;
       padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: #121417;
       font-size: 13px;
     }
     .row span{ color: var(--muted2); }
@@ -552,8 +499,8 @@
     @media (max-width: 600px){
       :root{
         --pad: 16px;
-        --radius: 14px;
-        --radius2: 20px;
+        --radius: 6px;
+        --radius2: 8px;
       }
 
       .topbar-inner{
@@ -569,7 +516,7 @@
       .mark{
         width: 28px;
         height: 28px;
-        border-radius: 8px;
+        border-radius: 5px;
       }
       .btn.primary{
         font-size: 13px;
@@ -681,7 +628,7 @@
       .callout .seal{
         width: 36px;
         height: 36px;
-        border-radius: 12px;
+        border-radius: 5px;
       }
       .callout .seal:after{
         font-size: 10px;
@@ -715,17 +662,11 @@
         font-size: 11px;
       }
     }
-
-    @media (prefers-reduced-motion: reduce){
-      .btn:hover{ transform:none; }
-    }
   </style>
 </head>
 
 <body>
-  <div class="noise" aria-hidden="true"></div>
-
-  <div class="topbar">
+    <div class="topbar">
     <div class="wrap">
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="GritForge Home">
@@ -767,7 +708,7 @@
 
             <div class="hero-actions">
               <a class="btn primary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
-              <a class="btn" href="#services">See what’s included</a>
+              <a class="btn" href="#services">See what's included</a>
             </div>
 
             <div class="stats">
@@ -922,7 +863,7 @@
             <h4>How I work</h4>
             <p>
               I use a proprietary bid workflow developed from real projects, real revisions, and real awarded work.
-              You don’t need the system — you get the results.
+              You don't need the system — you get the results.
             </p>
           </div>
         </div>
@@ -966,9 +907,9 @@
 
         <div class="contact">
           <div class="box">
-            <h4 style="margin-top:0;">Let’s talk</h4>
+            <h4 style="margin-top:0;">Let's talk</h4>
             <p style="margin:0;color:var(--muted2);line-height:1.5;">
-              Send the plan set (or invite link), the due date, and a short note on project type. I’ll reply with next steps.
+              Send the plan set (or invite link), the due date, and a short note on project type. I'll reply with next steps.
             </p>
 
             <div class="contact-details">
@@ -1010,7 +951,7 @@
 
               <div style="height:14px"></div>
 
-              <div class="box" style="background:rgba(0,0,0,.18);">
+              <div class="box" style="background:#121417;">
                 <h4 style="margin:0 0 8px;">Working style</h4>
                 <p style="margin:0;">
                   Calm, clean, and defensible. If something needs more data, it gets flagged immediately — no silent guessing.
