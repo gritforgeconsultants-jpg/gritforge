@@ -4,6 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="GritForge — Steel & Wood Framing Estimating & Bid Support for commercial and large residential projects. Fast, defensible bids built for the real world." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Arron, GritForge" />
+  <meta name="theme-color" content="#0e0f11" />
+  <link rel="canonical" href="https://gritforge.co/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='16' width='100' height='100' fill='%238f3a2b'/><rect rx='10' x='20' y='20' width='60' height='60' fill='none' stroke='white' stroke-opacity='.15' stroke-width='3'/></svg>" type="image/svg+xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GritForge | Steel & Wood Estimating & Bid Support" />
+  <meta property="og:description" content="Fast, defensible steel & wood framing estimating for commercial and large residential projects. Per-bid support built by contractors for the real world." />
+  <meta property="og:url" content="https://gritforge.co/" />
+  <meta property="og:site_name" content="GritForge" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="GritForge | Steel & Wood Estimating & Bid Support" />
+  <meta name="twitter:description" content="Fast, defensible steel & wood framing estimating for commercial and large residential projects. Per-bid support built by contractors for the real world." />
+
   <title>GritForge | Steel & Wood Estimating & Bid Support</title>
 
     <style>
@@ -143,7 +162,7 @@
     }
 
     /* hero */
-    header.hero{
+    .hero{
       padding: 72px 0 26px;
       position:relative;
     }
@@ -523,7 +542,7 @@
         padding: 10px 12px;
       }
 
-      header.hero{
+      .hero{
         padding: 40px 0 20px;
       }
       .hero h2{
@@ -663,10 +682,29 @@
       }
     }
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "GritForge",
+    "description": "Steel & wood framing estimating and bid support for commercial and large residential projects.",
+    "url": "https://gritforge.co",
+    "email": "arron@gritforge.com",
+    "areaServed": {
+      "@type": "Place",
+      "name": "Central Texas"
+    },
+    "serviceType": ["Construction Estimating", "Bid Support", "Steel Framing Estimating", "Wood Framing Estimating"],
+    "priceRange": "Per-bid pricing",
+    "knowsAbout": ["Steel framing", "Wood framing", "Construction estimating", "Bid preparation", "Scope extraction", "Commercial construction", "Residential construction"]
+  }
+  </script>
 </head>
 
 <body>
-    <div class="topbar">
+  <header class="topbar" role="banner">
     <div class="wrap">
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="GritForge Home">
@@ -690,10 +728,10 @@
         </a>
       </div>
     </div>
-  </div>
+  </header>
 
   <main id="top">
-    <header class="hero">
+    <section class="hero">
       <div class="wrap">
         <div class="hero-grid">
           <div>
@@ -764,7 +802,7 @@
           </aside>
         </div>
       </div>
-    </header>
+    </section>
 
     <section id="services">
       <div class="wrap">
@@ -964,22 +1002,23 @@
       </div>
     </section>
 
-    <footer>
-      <div class="wrap">
-        <div class="foot">
-          <div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:9px;"></div>
-              <div>
-                <div style="font-weight:800;letter-spacing:.22em;text-transform:uppercase;">GritForge</div>
-                <div style="color:var(--muted2);font-size:12px;">Steel & Wood Framing Estimating</div>
-              </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="mark" aria-hidden="true" style="width:26px;height:26px;border-radius:9px;"></div>
+            <div>
+              <div style="font-weight:800;letter-spacing:.22em;text-transform:uppercase;">GritForge</div>
+              <div style="color:var(--muted2);font-size:12px;">Steel & Wood Framing Estimating</div>
             </div>
           </div>
-          <div class="motto">Built by contractors for the real world</div>
         </div>
+        <div class="motto">Built by contractors for the real world</div>
       </div>
-    </footer>
-  </main>
+    </div>
+  </footer>
 </body>
 </html>
