@@ -58,8 +58,16 @@
       margin:0;
       font-family: var(--sans);
       color: var(--text);
-      background: var(--bg) url('GF_BrickLogo_v1.png') center top / cover no-repeat fixed;
+      background: var(--bg);
       overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background: url('GF_BrickLogo_v1.png') center top / cover no-repeat;
+      opacity: 0.08;
     }
 
     a{ color:inherit; text-decoration:none; }
