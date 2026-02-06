@@ -17,6 +17,7 @@
   <meta property="og:url" content="https://gritforge.co/" />
   <meta property="og:site_name" content="GritForge" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://gritforge.co/GF_Logo_v3.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
@@ -80,11 +81,25 @@
       gap: 14px;
     }
 
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
     .brand{
       display:flex;
       align-items:center;
       gap: 12px;
       min-width: 180px;
+    }
+    .brand-logo{
+      height: 38px;
+      width: auto;
+      display:block;
     }
     .mark{
       width: 34px;
@@ -525,17 +540,8 @@
       .topbar-inner{
         padding: 12px 0;
       }
-      .brand h1{
-        font-size: 12px;
-        letter-spacing: .20em;
-      }
-      .brand .sub{
-        font-size: 10px;
-      }
-      .mark{
-        width: 28px;
-        height: 28px;
-        border-radius: 5px;
+      .brand-logo{
+        height: 30px;
       }
       .btn.primary{
         font-size: 13px;
@@ -691,6 +697,7 @@
     "name": "GritForge",
     "description": "Steel & wood framing estimating and bid support for commercial and large residential projects.",
     "url": "https://gritforge.co",
+    "logo": "https://gritforge.co/GF_Logo_v3.png",
     "email": "arron@gritforge.com",
     "areaServed": {
       "@type": "Place",
@@ -708,10 +715,8 @@
     <div class="wrap">
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="GritForge Home">
-          <div class="mark" aria-hidden="true"></div>
-          <div>
-            <h1>GRITFORGE <span class="sub">Steel & Wood Bid Support</span></h1>
-          </div>
+          <img src="GF_Logo_v3.png" alt="GritForge — Steel & Wood Estimating & Bid Support" class="brand-logo" width="180" height="40" />
+          <h1 class="sr-only">GritForge — Steel & Wood Bid Support</h1>
         </a>
 
         <nav aria-label="Primary">
