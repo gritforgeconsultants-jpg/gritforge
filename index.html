@@ -507,6 +507,31 @@
     .row span{ color: var(--muted2); }
     .row b{ font-family: var(--mono); font-weight: 700; letter-spacing: .03em; }
 
+    .region-select{ display:flex; gap:8px; align-items:center; }
+    .region-select input{ display:none; }
+    .region-select label{
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing:.06em;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--line2);
+      background: transparent;
+      color: var(--muted2);
+      cursor:pointer;
+      transition: all .15s;
+    }
+    .region-select label:hover{
+      border-color: #444;
+      color: var(--text);
+    }
+    .region-select input:checked + label{
+      border-color: var(--accent);
+      background: #3a1515;
+      color: var(--text);
+    }
+
     footer{
       padding: 22px 0 40px;
       color: var(--muted2);
@@ -707,10 +732,10 @@
     "url": "https://gritforge.co",
     "logo": "https://gritforge.co/GF_Logo_v3.png",
     "email": "gritforgeconsultants@gmail.com",
-    "areaServed": {
-      "@type": "Place",
-      "name": "Central Texas"
-    },
+    "areaServed": [
+      {"@type": "State", "name": "Texas"},
+      {"@type": "State", "name": "Colorado"}
+    ],
     "serviceType": ["Construction Estimating", "Bid Support", "Steel Framing Estimating", "Wood Framing Estimating"],
     "priceRange": "Per-bid pricing",
     "knowsAbout": ["Steel framing", "Wood framing", "Construction estimating", "Bid preparation", "Scope extraction", "Commercial construction", "Residential construction"]
@@ -970,7 +995,12 @@
               </div>
               <div class="row">
                 <span>Region</span>
-                <b>Central Texas</b>
+                <div class="region-select">
+                  <input type="radio" name="region" id="r-tx" checked />
+                  <label for="r-tx">TX</label>
+                  <input type="radio" name="region" id="r-co" />
+                  <label for="r-co">CO</label>
+                </div>
               </div>
               <div class="row">
                 <span>Support</span>
