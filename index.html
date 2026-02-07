@@ -507,29 +507,27 @@
     .row span{ color: var(--muted2); }
     .row b{ font-family: var(--mono); font-weight: 700; letter-spacing: .03em; }
 
-    .region-select{ display:flex; gap:8px; align-items:center; }
-    .region-select input{ display:none; }
-    .region-select label{
+    .state-select{
       font-family: var(--mono);
       font-weight: 700;
-      letter-spacing:.06em;
       font-size: 13px;
-      padding: 6px 14px;
+      letter-spacing:.03em;
+      padding: 6px 10px;
       border-radius: 4px;
       border: 1px solid var(--line2);
-      background: transparent;
-      color: var(--muted2);
+      background: #121417;
+      color: var(--text);
       cursor:pointer;
-      transition: all .15s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237f848b'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
     }
-    .region-select label:hover{
-      border-color: #444;
-      color: var(--text);
-    }
-    .region-select input:checked + label{
+    .state-select:focus{
+      outline: none;
       border-color: var(--accent);
-      background: #3a1515;
-      color: var(--text);
     }
 
     footer{
@@ -732,10 +730,10 @@
     "url": "https://gritforge.co",
     "logo": "https://gritforge.co/GF_Logo_v3.png",
     "email": "gritforgeconsultants@gmail.com",
-    "areaServed": [
-      {"@type": "State", "name": "Texas"},
-      {"@type": "State", "name": "Colorado"}
-    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
     "serviceType": ["Construction Estimating", "Bid Support", "Steel Framing Estimating", "Wood Framing Estimating"],
     "priceRange": "Per-bid pricing",
     "knowsAbout": ["Steel framing", "Wood framing", "Construction estimating", "Bid preparation", "Scope extraction", "Commercial construction", "Residential construction"]
@@ -778,7 +776,7 @@
             <h2><span>Fast.</span> Defensible. <br/>Built by contractors for the real world.</h2>
 
             <p class="lead">
-              I help steel and wood framing contractors submit clean, accurate bids when volume spikes and deadlines tighten.
+              We help steel and wood framing contractors submit clean, accurate bids when volume spikes and deadlines tighten.
               No fluff. No guesswork. Just solid estimating.
             </p>
 
@@ -846,7 +844,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <h3>What I Do</h3>
+            <h3>What We Do</h3>
             <p>Per-bid estimating support for commercial and large residential steel & wood framing — built to move fast without missing scope.</p>
           </div>
         </div>
@@ -854,7 +852,7 @@
         <div class="grid-3">
           <div class="box">
             <h4>Overflow Estimating</h4>
-            <p>When bids stack up, I carry the workload so your submissions stay on time and clean.</p>
+            <p>When bids stack up, we carry the workload so your submissions stay on time and clean.</p>
           </div>
           <div class="box">
             <h4>Scope Clarity</h4>
@@ -880,7 +878,7 @@
         <div class="grid-3">
           <div class="box">
             <h4>Steel Fabricators & Erectors</h4>
-            <p>Bid volume grows faster than headcount. I help you keep pace.</p>
+            <p>Bid volume grows faster than headcount. We help you keep pace.</p>
           </div>
           <div class="box">
             <h4>Wood Framing Contractors</h4>
@@ -918,7 +916,7 @@
           <div class="step">
             <div>
               <div class="num">Step 02</div>
-              <h4>I build the bid</h4>
+              <h4>We build the bid</h4>
               <p>Scope extraction, line items, and protections assembled for submission.</p>
             </div>
           </div>
@@ -936,9 +934,9 @@
         <div class="callout" aria-label="Workflow Note">
           <div class="seal" aria-hidden="true"></div>
           <div>
-            <h4>How I work</h4>
+            <h4>How GritForge Works</h4>
             <p>
-              I use a proprietary bid workflow developed from real projects, real revisions, and real awarded work.
+              We use a proprietary bid workflow developed from real projects, real revisions, and real awarded work.
               You don't need the system — you get the results.
             </p>
           </div>
@@ -985,7 +983,7 @@
           <div class="box">
             <h4 style="margin-top:0;">Let's talk</h4>
             <p style="margin:0;color:var(--muted2);line-height:1.5;">
-              Send the plan set (or invite link), the due date, and a short note on project type. I'll reply with next steps.
+              Send the plan set (or invite link), the due date, and a short note on project type. We'll reply with next steps.
             </p>
 
             <div class="contact-details">
@@ -995,12 +993,22 @@
               </div>
               <div class="row">
                 <span>Region</span>
-                <div class="region-select">
-                  <input type="radio" name="region" id="r-tx" checked />
-                  <label for="r-tx">TX</label>
-                  <input type="radio" name="region" id="r-co" />
-                  <label for="r-co">CO</label>
-                </div>
+                <select class="state-select" aria-label="Select state">
+                  <option value="">Select State</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                  <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                  <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                  <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                  <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                  <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                  <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                  <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                  <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                  <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                  <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                  <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                  <option>WI</option><option>WY</option>
+                </select>
               </div>
               <div class="row">
                 <span>Support</span>
@@ -1010,7 +1018,7 @@
 
             <div class="hero-actions" style="margin-top:14px;">
               <a class="btn primary" href="mailto:gritforgeconsultants@gmail.com?subject=Bid%20Support%20Request&body=Project%20name%3A%0D%0ABid%20due%20date%3A%0D%0AProject%20type%20(steel%2Fwood)%3A%0D%0APlan%20set%20link%2Fattachment%3A%0D%0ANotes%3A">
-                Email Arron <span aria-hidden="true">→</span>
+                Email Us <span aria-hidden="true">→</span>
               </a>
               <a class="btn" href="#services">Review services</a>
             </div>
