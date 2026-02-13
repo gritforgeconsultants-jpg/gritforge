@@ -460,6 +460,30 @@
       font-size: 13px;
       line-height: 1.45;
     }
+    .tier-label{
+      display:inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+    .tier-entry{
+      border: 1px solid var(--line2);
+      color: var(--muted);
+    }
+    .tier-core{
+      border: 1px solid #6b1e1e;
+      background: #3a1515;
+      color: var(--text);
+    }
+    .tier-premium{
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: var(--text);
+    }
     .box ul{
       list-style:none;
       margin: 8px 0 0;
@@ -810,7 +834,7 @@
       "name": "United States"
     },
     "serviceType": ["Structural Steel Estimating", "Commercial Wood Trade Takeoffs", "Scope Gap & Risk Detection", "Bid Strategy & Documentation", "Estimating Process Consulting"],
-    "priceRange": "Per-bid pricing",
+    "priceRange": "Per-bid, monthly retainer, and consulting project pricing",
     "knowsAbout": ["Structural steel estimating", "Wood framing takeoffs", "Preconstruction intelligence", "Bid preparation", "Scope gap detection", "Risk exposure analysis", "Constructability review", "Commercial construction", "Residential construction"]
   }
   </script>
@@ -876,7 +900,7 @@
             <div class="panel-inner">
               <div class="card-title">
                 <h3>Bid Package</h3>
-                <span class="badge">Pay-per-bid</span>
+                <span class="badge">Flexible Pricing</span>
               </div>
 
               <ul class="deliverables" id="deliverables">
@@ -1032,8 +1056,8 @@
             <p>Our deliverables are built to survive RFIs, revisions, and scope disputes. Assumptions and exclusions aren't an afterthought — they're the backbone of every package.</p>
           </div>
           <div class="box">
-            <h4>No Retainers. No Contracts.</h4>
-            <p>Pay per bid. Use us when you need us. Scale up during bid season, scale back when things slow down. No minimums, no strings.</p>
+            <h4>Flexible. On Your Terms.</h4>
+            <p>Pay per bid, go monthly, or scope a consulting project. Scale up during bid season, scale back when things slow down. You choose the level that fits.</p>
           </div>
           <div class="box">
             <h4>Speed Without Shortcuts</h4>
@@ -1100,22 +1124,42 @@
         <div class="section-head">
           <div>
             <h3>Pricing</h3>
-            <p>Pricing is per bid and based on scope and complexity. You get a clear number up front.</p>
+            <p>Three ways to work with us — pick the level that fits your volume and needs. Clear scope, clear pricing, no surprises.</p>
           </div>
         </div>
 
         <div class="grid-3">
           <div class="box">
-            <h4>Pay-per-bid</h4>
-            <p>No subscriptions. No long contracts. Use support when you need it.</p>
+            <span class="tier-label tier-entry">Entry</span>
+            <h4>Per Bid</h4>
+            <p>One bid at a time. Send plans and a due date — get a clean, submission-ready package back. No commitment, no minimums.</p>
+            <ul>
+              <li>Scoped and priced per project</li>
+              <li>Ideal for overflow or one-off bids</li>
+              <li>Full deliverable package included</li>
+            </ul>
           </div>
-          <div class="box">
-            <h4>Defined up front</h4>
-            <p>After scope + timeline review, you get a clean number before work begins.</p>
+          <div class="box" style="border-color:#6b1e1e;">
+            <span class="tier-label tier-core">Core</span>
+            <h4>Monthly Retainer</h4>
+            <p>Dedicated estimating capacity on a recurring basis. Built for teams bidding consistently and need reliable throughput every month.</p>
+            <ul>
+              <li>Reserved capacity each month</li>
+              <li>Priority turnaround</li>
+              <li>Volume-based pricing</li>
+              <li>Ongoing scope and process alignment</li>
+            </ul>
           </div>
-          <div class="box">
-            <h4>No surprises</h4>
-            <p>Clear scope coverage, clear deliverables, clear expectations.</p>
+          <div class="box" style="border-color:var(--accent);">
+            <span class="tier-label tier-premium">Premium</span>
+            <h4>Consulting Projects</h4>
+            <p>Deep-dive engagements — estimating process audits, workflow redesign, system buildouts, and bid strategy development.</p>
+            <ul>
+              <li>Estimating workflow optimization</li>
+              <li>Bid review framework design</li>
+              <li>Output standardization</li>
+              <li>Custom project scope</li>
+            </ul>
           </div>
         </div>
       </div>
