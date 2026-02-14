@@ -2,253 +2,1208 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GritForge | Preconstruction Intelligence Platform for Construction</title>
-  <meta name="description" content="GritForge is the authority platform for preconstruction intelligence, bid engine systems, and discipline-driven construction execution." />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#0b0d0f" />
-  <link rel="canonical" href="https://gritforge.co/" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="GritForge Consultants — Preconstruction intelligence & bid support. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Arron, GritForge" />
+  <meta name="theme-color" content="#0e0f11" />
+  <link rel="canonical" href="https://gritforgeconsultants.com/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='16' width='100' height='100' fill='%238b2222'/><rect rx='10' x='20' y='20' width='60' height='60' fill='none' stroke='white' stroke-opacity='.15' stroke-width='3'/></svg>" type="image/svg+xml" />
 
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="GritForge | Preconstruction Intelligence Platform for Construction" />
-  <meta property="og:description" content="Industrial-strength preconstruction intelligence, bid architecture, and disciplined execution systems." />
-  <meta property="og:url" content="https://gritforge.co/" />
+  <meta property="og:title" content="GritForge Consultants | Preconstruction Intelligence & Bid Support" />
+  <meta property="og:description" content="Stronger bids, reduced risk, better project outcomes. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation." />
+  <meta property="og:url" content="https://gritforgeconsultants.com/" />
   <meta property="og:site_name" content="GritForge" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://gritforgeconsultants.com/GF_Logo_v3.png" />
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GritForge | Preconstruction Intelligence Platform for Construction" />
-  <meta name="twitter:description" content="Authority platform for preconstruction intelligence, technical precision, and construction leadership." />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="GritForge Consultants | Preconstruction Intelligence & Bid Support" />
+  <meta name="twitter:description" content="Stronger bids, reduced risk, better project outcomes. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
+  <title>GritForge Consultants | Preconstruction Intelligence & Bid Support</title>
+
+    <style>
+    :root{
+      --bg: #0e0f11;
+      --panel: #16181c;
+      --panel-2: #1b1e22;
+      --text: #e6e6e6;
+      --muted: #9aa0a6;
+      --muted2: #7f848b;
+      --line: #23262b;
+      --line2: #2b2f35;
+
+      --accent: #8b2222;
+      --accent2: #a12828;
+
+      --shadow: 0 6px 12px rgba(0,0,0,.35);
+      --radius: 6px;
+      --radius2: 8px;
+
+      --max: 1120px;
+      --pad: 22px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: "Arial Narrow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background: url('GF_BrickLogo_v1.png') center top / cover no-repeat;
+      opacity: 0.15;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* top bar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: #0c0d0f;
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 180px;
+    }
+    .brand-logo{
+      height: 114px;
+      width: auto;
+      display:block;
+    }
+    .mark{
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      background: var(--accent);
+      border: 1px solid #b03333;
+      position:relative;
+    }
+    .mark:after{
+      content:"";
+      position:absolute;
+      inset:7px;
+      border-radius:4px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .brand h1{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .brand .sub{
+      display:block;
+      font-size: 12px;
+      letter-spacing:.08em;
+      color: var(--muted2);
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+    }
+    nav a:hover{
+      color: var(--text);
+      border-color: var(--line2);
+      background: var(--panel);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 650;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      border-color: #343a41;
+    }
+    .btn.primary{
+      border-color: #b03333;
+      background: var(--accent);
+    }
+    .btn.primary:hover{
+      border-color: #c43c3c;
+    }
+
+    /* blueprint banner */
+    .blueprint-banner{
+      width:100%;
+      height: 180px;
+      position:relative;
+      overflow:hidden;
+      margin: 0;
+    }
+    .blueprint-banner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position: center 60%;
+      display:block;
+      filter: brightness(0.3);
+    }
+    .blueprint-banner::before,
+    .blueprint-banner::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height: 60px;
+      z-index:1;
+      pointer-events:none;
+    }
+    .blueprint-banner::before{
+      top:0;
+      background: linear-gradient(to bottom, var(--bg), transparent);
+    }
+    .blueprint-banner::after{
+      bottom:0;
+      background: linear-gradient(to top, var(--bg), transparent);
+    }
+
+    /* section with background image */
+    .section-bg{
+      position:relative;
+    }
+    .section-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      opacity: 0.06;
+      pointer-events:none;
+    }
+    .section-bg > *{ position:relative; z-index:1; }
+    #how.section-bg::before{
+      background-image: url('website_image_2.png');
+    }
+    #contact.section-bg::before{
+      background-image: url('website_image_3.png');
+    }
+
+    /* hero */
+    .hero{
+      padding: 72px 0 26px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.12em;
+      color: var(--muted2);
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      width: fit-content;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      background: var(--accent2);
+    }
+
+    .hero h2{
+      margin: 18px 0 10px;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+    .hero h2 span{
+      color: var(--text);
+    }
+
+    .lead{
+      margin: 14px 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+      max-width: 560px;
+    }
+    .stat{
+      padding: 14px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: var(--panel);
+    }
+    .stat b{
+      display:block;
+      font-size: 13px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .stat span{
+      display:block;
+      margin-top: 6px;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel-inner{
+      position:relative;
+      padding: 18px;
+    }
+
+    .card-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .card-title h3{
+      margin:0;
+      font-size: 13px;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #6b1e1e;
+      background: #3a1515;
+      color: var(--text);
+      white-space:nowrap;
+    }
+
+    .deliverables{
+      list-style:none;
+      margin: 12px 0 0;
+      padding:0;
+      display:grid;
+      gap: 10px;
+    }
+    .deliverables li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: #121417;
+    }
+    .check{
+      width: 18px; height: 18px;
+      border-radius: 3px;
+      margin-top: 2px;
+      background: #3a1515;
+      border: 1px solid #6b1e1e;
+      flex: 0 0 18px;
+      position:relative;
+    }
+    .check:after{
+      content:"";
+      position:absolute;
+      left: 5px;
+      top: 4px;
+      width: 6px;
+      height: 9px;
+      border-right: 2px solid rgba(255,255,255,.88);
+      border-bottom: 2px solid rgba(255,255,255,.88);
+      transform: rotate(36deg);
+    }
+    .deliverables b{
+      display:block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .deliverables span{
+      display:block;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height:1.35;
+    }
+
+    /* sections */
+    section{
+      padding: 26px 0;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+    .section-head h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.01em;
+    }
+    .section-head p{
+      margin:0;
+      color: var(--muted2);
+      max-width: 60ch;
+      line-height: 1.5;
+      font-size: 13.5px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .box{
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      padding: 16px;
+    }
+    .box h4{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing:.02em;
+    }
+    .box p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .tier-label{
+      display:inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+    .tier-entry{
+      border: 1px solid var(--line2);
+      color: var(--muted);
+    }
+    .tier-core{
+      border: 1px solid #6b1e1e;
+      background: #3a1515;
+      color: var(--text);
+    }
+    .tier-premium{
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: var(--text);
+    }
+    .box ul{
+      list-style:none;
+      margin: 8px 0 0;
+      padding:0;
+    }
+    .box ul li{
+      padding: 3px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .box ul li::before{
+      content:"—";
+      color: var(--accent2);
+      margin-right: 8px;
+    }
+
+    .how{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .step{
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step > div{ position:relative; }
+    .num{
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing:.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .step h4{
+      margin: 8px 0 6px;
+      font-size: 15px;
+    }
+    .step p{
+      margin: 0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .callout{
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+      padding: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid #6b1e1e;
+      background: #151619;
+    }
+    .callout .seal{
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background: #3a1515;
+      border: 1px solid #6b1e1e;
+      flex: 0 0 44px;
+      position:relative;
+    }
+    .callout .seal:after{
+      content:"GF";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family: var(--mono);
+      font-weight: 800;
+      letter-spacing:.12em;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+    }
+    .callout h4{
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+    .callout p{
+      margin:0;
+      color: var(--muted2);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    /* contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    .contact .box{
+      height: 100%;
+    }
+
+    .contact-details{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: #121417;
+      font-size: 13px;
+    }
+    .row span{ color: var(--muted2); }
+    .row b{ font-family: var(--mono); font-weight: 700; letter-spacing: .03em; }
+
+    .state-select{
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing:.03em;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--line2);
+      background: #121417;
+      color: var(--text);
+      cursor:pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237f848b'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+    .state-select:focus{
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    footer{
+      padding: 22px 0 40px;
+      color: var(--muted2);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+    }
+    .foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .foot .motto{
+      font-family: var(--mono);
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+    }
+
+    /* responsive - tablet */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .how{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+    }
+
+    /* responsive - mobile */
+    @media (max-width: 600px){
+      :root{
+        --pad: 16px;
+        --radius: 6px;
+        --radius2: 8px;
+      }
+
+      .topbar-inner{
+        padding: 12px 0;
+      }
+      .brand-logo{
+        height: 80px;
+      }
+      .btn.primary{
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+
+      .blueprint-banner{
+        height: 100px;
+      }
+      .hero{
+        padding: 40px 0 20px;
+      }
+      .hero h2{
+        font-size: 28px;
+        line-height: 1.1;
+      }
+      .kicker{
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+      .lead{
+        font-size: 14px;
+      }
+
+      .hero-actions{
+        flex-direction: column;
+      }
+      .hero-actions .btn{
+        width: 100%;
+        justify-content: center;
+        padding: 14px 16px;
+        font-size: 14px;
+      }
+
+      .stats{
+        grid-template-columns: 1fr;
+      }
+      .stat{
+        padding: 12px;
+      }
+      .stat b{
+        font-size: 12px;
+      }
+      .stat span{
+        font-size: 12px;
+      }
+
+      .panel-inner{
+        padding: 14px;
+      }
+      .card-title h3{
+        font-size: 12px;
+      }
+      .badge{
+        font-size: 10px;
+        padding: 6px 8px;
+      }
+      .deliverables li{
+        padding: 10px;
+      }
+      .deliverables b{
+        font-size: 13px;
+      }
+      .deliverables span{
+        font-size: 12px;
+      }
+
+      section{
+        padding: 20px 0;
+      }
+      .section-head{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .section-head h3{
+        font-size: 16px;
+      }
+      .section-head p{
+        font-size: 13px;
+      }
+
+      .box{
+        padding: 14px;
+      }
+      .box h4{
+        font-size: 13px;
+      }
+      .box p{
+        font-size: 12px;
+      }
+
+      .step{
+        padding: 14px;
+      }
+      .num{
+        font-size: 11px;
+      }
+      .step h4{
+        font-size: 14px;
+      }
+      .step p{
+        font-size: 12px;
+      }
+
+      .callout{
+        flex-direction: column;
+        padding: 14px;
+        gap: 12px;
+      }
+      .callout .seal{
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+      }
+      .callout .seal:after{
+        font-size: 10px;
+      }
+      .callout h4{
+        font-size: 14px;
+      }
+      .callout p{
+        font-size: 12px;
+      }
+
+      .row{
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px;
+        font-size: 12px;
+      }
+
+      footer{
+        padding: 18px 0 30px;
+      }
+      .foot{
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+      }
+      .foot > div:first-child > div{
+        justify-content: center;
+      }
+      .motto{
+        font-size: 11px;
+      }
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "GritForge Consultants",
+    "description": "Preconstruction intelligence and bid support. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation.",
+    "url": "https://gritforgeconsultants.com",
+    "logo": "https://gritforgeconsultants.com/GF_Logo_v3.png",
+    "email": "gritforgeconsultants@gmail.com",
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "serviceType": ["Structural Steel Estimating", "Commercial Wood Trade Takeoffs", "Scope Gap & Risk Detection", "Bid Strategy & Documentation", "Estimating Process Consulting"],
+    "priceRange": "Per-bid, monthly retainer, and consulting project pricing",
+    "knowsAbout": ["Structural steel estimating", "Wood framing takeoffs", "Preconstruction intelligence", "Bid preparation", "Scope gap detection", "Risk exposure analysis", "Constructability review", "Commercial construction", "Residential construction"]
+  }
+  </script>
 </head>
+
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar" role="banner">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="/" aria-label="GritForge Home">
+          <img src="GF_Logo_v3.png" alt="GritForge — Steel & Wood Estimating & Bid Support" class="brand-logo" width="180" height="40" />
+          <h1 class="sr-only">GritForge Consultants — Preconstruction Intelligence & Bid Support</h1>
+        </a>
 
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="GritForge Home">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-block">
-          <span class="brand-name">GRITFORGE</span>
-          <span class="brand-sub">Preconstruction Intelligence Platform</span>
-        </span>
-      </a>
+        <nav aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#deliverables">Deliverables</a>
+          <a href="#why">Why GritForge</a>
+          <a href="#how">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="#platform">Platform</a>
-        <a href="#engine">Bid Engine</a>
-        <a href="#method">Methodology</a>
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#origin">Origin</a>
-      </nav>
-
-      <a class="btn btn-primary" href="#gateway">Consulting Gateway</a>
+        <a class="btn primary" href="#contact">
+          Start a Conversation
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <main id="main">
-    <section id="top" class="hero" aria-label="Hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Authority Platform</p>
-          <h1>Preconstruction Intelligence Platform for Construction</h1>
-          <p class="hero-lead">
-            GritForge is where discipline meets technical intelligence. Built for contractors who demand
-            precision, risk control, and industrial-strength bid structure before the work begins.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#platform">Explore Platform</a>
-            <a class="btn btn-ghost" href="#engine">View Bid Engine</a>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="dot" aria-hidden="true"></span> Preconstruction Intelligence & Bid Support</div>
+
+            <h2><span>Stronger bids.</span> Reduced risk. <br/>Better project outcomes.</h2>
+
+            <p class="lead">
+              GritForge Consultants helps construction teams submit stronger, more profitable bids by ensuring scope completeness and pricing accuracy before project award.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+              <a class="btn" href="#services">See what's included</a>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <b>Delivery</b>
+                <span>Submission-ready notes, line items, and protections</span>
+              </div>
+              <div class="stat">
+                <b>Focus</b>
+                <span>Commercial & large residential: scope clarity, speed, and defense</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Bid Package Snapshot">
+            <div class="panel-inner">
+              <div class="card-title">
+                <h3>Bid Package</h3>
+                <span class="badge">Flexible Pricing</span>
+              </div>
+
+              <ul class="deliverables" id="deliverables">
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Scope Extraction</b>
+                    <span>Plan review + scope breakdown built to avoid misses</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Line Items</b>
+                    <span>GC-ready structure with clear descriptions and coverage</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Assumptions & Exclusions</b>
+                    <span>Written to protect you through revisions and follow-ups</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="check" aria-hidden="true"></div>
+                  <div>
+                    <b>Notes That Stand Up</b>
+                    <span>Clarity that holds under review, RFI, and schedule pressure</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="blueprint-banner" aria-hidden="true">
+      <img src="website_image_1.png" alt="" />
+    </div>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>What We Do</h3>
+            <p>Preconstruction intelligence and bid support — scope completeness, pricing accuracy, and defensible documentation before project award.</p>
           </div>
         </div>
 
-        <aside class="hero-panel" aria-label="Platform telemetry">
-          <p class="panel-title">Operational Signal</p>
-          <ul>
-            <li><span>Mode</span><b>Preconstruction Intelligence</b></li>
-            <li><span>Core</span><b>Bid Architecture + Scope Defense</b></li>
-            <li><span>Standard</span><b>Discipline Under Pressure</b></li>
-            <li><span>Identity</span><b>Built by Construction Reality</b></li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section id="platform" class="section" aria-label="Platform pillars">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Platform Core</p>
-          <h2>Brand Headquarters for a Construction Technology Movement</h2>
-          <p>
-            This is not a service brochure. GritForge is the command layer for methodology, systems,
-            and leadership in preconstruction.
-          </p>
-        </div>
-
-        <div class="card-grid three">
-          <article class="card">
-            <h3>Discipline Framework</h3>
-            <p>Repeatable operating rules that turn chaos into controlled outcomes.</p>
-          </article>
-          <article class="card">
-            <h3>Technical Intelligence</h3>
-            <p>Scope extraction, conflict detection, and structured decision support.</p>
-          </article>
-          <article class="card">
-            <h3>Industrial Strength</h3>
-            <p>Built to hold under revisions, RFIs, schedule pressure, and field reality.</p>
-          </article>
+        <div class="grid-3">
+          <div class="box">
+            <h4>Estimating & Takeoffs</h4>
+            <p>Structural steel and commercial wood framing — quantities, scope documentation, and pricing breakdowns.</p>
+          </div>
+          <div class="box">
+            <h4>Scope & Risk Protection</h4>
+            <p>Missing scope identification, trade overlap detection, and defensible assumptions and exclusions.</p>
+          </div>
+          <div class="box">
+            <h4>Bid Strategy & Consulting</h4>
+            <p>Submission-ready deliverables, workflow optimization, and estimating process design.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="engine" class="section section-contrast" aria-label="Bid engine system">
-      <div class="container">
+    <section id="who">
+      <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Bid Engine System</p>
-          <h2>Precision Pipeline for Better Bids</h2>
+          <div>
+            <h3>Who This Is For</h3>
+            <p>GritForge supports teams handling multiple bids per week — without hiring full-time.</p>
+          </div>
         </div>
 
-        <ol class="engine-flow">
-          <li>
-            <span class="step">01</span>
+        <div class="grid-3">
+          <div class="box">
+            <h4>Steel Fabricators & Erectors</h4>
+            <p>Bid volume grows faster than headcount. We help you keep pace.</p>
+          </div>
+          <div class="box">
+            <h4>Wood Framing Contractors</h4>
+            <p>Clean takeoffs and defensible packages for commercial and large residential bids.</p>
+          </div>
+          <div class="box">
+            <h4>GCs With Structural Scope</h4>
+            <p>Need steel or wood estimates that won't collapse under review or revisions.</p>
+          </div>
+          <div class="box">
+            <h4>Busy Estimators</h4>
+            <p>When the schedule tightens, you need clean support — not added chaos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Why GritForge</h3>
+            <p>Most estimating services hand you numbers. We hand you bids that win — and hold up after award.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box">
+            <h4>Built by Contractors</h4>
+            <p>Our team comes from the field. Every estimate is built by people who've run projects and dealt with the fallout of bad bids firsthand.</p>
+          </div>
+          <div class="box">
+            <h4>Scope First, Defensible Always</h4>
+            <p>We catch what's missing — scope gaps, trade overlaps, and risk — then build assumptions and exclusions that hold up under RFIs and revisions.</p>
+          </div>
+          <div class="box">
+            <h4>Fast, Flexible, Nationwide</h4>
+            <p>Per bid, monthly, or project-based. We move fast because the process is dialed in — supporting teams across all 50 states, fully remote.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section-bg">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>How It Works</h3>
+            <p>Simple process. Clear inputs. Clean outputs.</p>
+          </div>
+        </div>
+
+        <div class="how">
+          <div class="step">
             <div>
-              <h3>Decompose Drawings</h3>
-              <p>Organize specifications, details, and trade interfaces into a clean scope map.</p>
+              <div class="num">Step 01</div>
+              <h4>Send plans + due date</h4>
+              <p>You provide plan set, scope expectations, and submission deadline.</p>
             </div>
-          </li>
-          <li>
-            <span class="step">02</span>
+          </div>
+          <div class="step">
             <div>
-              <h3>Detect Risk Signals</h3>
-              <p>Flag missing scope, overlap, sequencing traps, and assumptions requiring control.</p>
+              <div class="num">Step 02</div>
+              <h4>We build the bid</h4>
+              <p>Scope extraction, line items, and protections assembled for submission.</p>
             </div>
-          </li>
-          <li>
-            <span class="step">03</span>
+          </div>
+          <div class="step">
             <div>
-              <h3>Build Bid Architecture</h3>
-              <p>Generate defensible line-item structure with exclusions and assumptions that protect margin.</p>
+              <div class="num">Step 03</div>
+              <h4>You submit</h4>
+              <p>Receive a clean, ready-to-send package — no extra translation required.</p>
             </div>
-          </li>
-          <li>
-            <span class="step">04</span>
-            <div>
-              <h3>Standardize Output</h3>
-              <p>Deliver repeatable documents that stand up in review, award, and execution handoff.</p>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="callout" aria-label="Workflow Note">
+          <div class="seal" aria-hidden="true"></div>
+          <div>
+            <h4>How GritForge Works</h4>
+            <p>
+              We use a proprietary bid workflow developed from real projects, real revisions, and real awarded work.
+              The outcome: stronger bids, reduced risk, and better project outcomes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Pricing</h3>
+            <p>Three ways to work with us — pick the level that fits your volume and needs. Clear scope, clear pricing, no surprises.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box">
+            <span class="tier-label tier-entry">Entry</span>
+            <h4>Per Bid</h4>
+            <p>One bid at a time. Send plans and a due date — get a clean, submission-ready package back. No commitment, no minimums.</p>
+            <ul>
+              <li>Scoped and priced per project</li>
+              <li>Ideal for overflow or one-off bids</li>
+              <li>Full deliverable package included</li>
+            </ul>
+          </div>
+          <div class="box" style="border-color:#6b1e1e;">
+            <span class="tier-label tier-core">Core</span>
+            <h4>Monthly Retainer</h4>
+            <p>Dedicated estimating capacity on a recurring basis. Built for teams bidding consistently and need reliable throughput every month.</p>
+            <ul>
+              <li>Reserved capacity each month</li>
+              <li>Priority turnaround</li>
+              <li>Volume-based pricing</li>
+              <li>Ongoing scope and process alignment</li>
+            </ul>
+          </div>
+          <div class="box" style="border-color:var(--accent);">
+            <span class="tier-label tier-premium">Premium</span>
+            <h4>Consulting Projects</h4>
+            <p>Deep-dive engagements — estimating process audits, workflow redesign, system buildouts, and bid strategy development.</p>
+            <ul>
+              <li>Estimating workflow optimization</li>
+              <li>Bid review framework design</li>
+              <li>Output standardization</li>
+              <li>Custom project scope</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-bg">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Contact</h3>
+            <p>If you need reliable estimating help on steel or wood framing bids, reach out.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="box">
+            <h4 style="margin-top:0;">Let's talk</h4>
+            <p style="margin:0;color:var(--muted2);line-height:1.5;">
+              Send the plan set (or invite link), the due date, and a short note on project type. We'll reply with next steps.
+            </p>
+
+            <div class="contact-details">
+              <div class="row">
+                <span>Email</span>
+                <b><a href="mailto:gritforgeconsultants@gmail.com">gritforgeconsultants@gmail.com</a></b>
+              </div>
+              <div class="row">
+                <span>Region</span>
+                <select class="state-select" aria-label="Select state">
+                  <option value="">Select State</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                  <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                  <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                  <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                  <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                  <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                  <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                  <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                  <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                  <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                  <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                  <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                  <option>WI</option><option>WY</option>
+                </select>
+              </div>
+              <div class="row">
+                <span>Support</span>
+                <b>Remote Available</b>
+              </div>
             </div>
-          </li>
-        </ol>
-      </div>
-    </section>
 
-    <section id="method" class="section" aria-label="Methodology">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Operating Doctrine</p>
-          <h2>Transformation Through Discipline</h2>
-        </div>
+            <div class="hero-actions" style="margin-top:14px;">
+              <a class="btn primary" href="mailto:gritforgeconsultants@gmail.com?subject=Bid%20Support%20Request&body=Project%20name%3A%0D%0ABid%20due%20date%3A%0D%0AProject%20type%20(steel%2Fwood)%3A%0D%0APlan%20set%20link%2Fattachment%3A%0D%0ANotes%3A">
+                Email Us <span aria-hidden="true">→</span>
+              </a>
+              <a class="btn" href="#services">Review services</a>
+            </div>
+          </div>
 
-        <div class="doctrine-grid">
-          <article>
-            <h3>Scope Before Speed</h3>
-            <p>Fast without clarity is fragile. Scope certainty is the baseline.</p>
-          </article>
-          <article>
-            <h3>Precision Over Noise</h3>
-            <p>Every assumption, exclusion, and qualifier is intentional and measurable.</p>
-          </article>
-          <article>
-            <h3>System Over Heroics</h3>
-            <p>Repeatable systems outperform reactive effort in high-pressure environments.</p>
-          </article>
-          <article>
-            <h3>Build for the Field</h3>
-            <p>Outputs are designed for the realities of project execution, not presentation theater.</p>
-          </article>
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="card-title">
+                <h3>Operating Motto</h3>
+                <span class="badge">GritForge</span>
+              </div>
+              <p style="margin:10px 0 0;color:var(--muted);line-height:1.55;">
+                Built to carry the load when it matters.
+              </p>
+              <div style="height:10px"></div>
+              <p style="margin:0;color:var(--muted2);line-height:1.55;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;">
+                Forged by experience. Refined by discipline.
+              </p>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="ecosystem" class="section section-contrast" aria-label="Technology ecosystem">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Future Platform</p>
-          <h2>Construction Technology Ecosystem in Motion</h2>
-          <p>
-            GritForge is evolving into an integrated environment where data, automation,
-            and trade intelligence raise preconstruction standards across teams.
-          </p>
-        </div>
-
-        <div class="card-grid three">
-          <article class="card">
-            <h3>Intelligence Layer</h3>
-            <p>Project signals, scope risk indicators, and technical pattern recognition.</p>
-          </article>
-          <article class="card">
-            <h3>Workflow Layer</h3>
-            <p>Structured preconstruction operating loops for estimators and leadership teams.</p>
-          </article>
-          <article class="card">
-            <h3>Execution Layer</h3>
-            <p>Field-aware outputs that link estimating confidence with project performance.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="origin" class="section" aria-label="Origin signals">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Origin Signal</p>
-          <h2>Forged From Pressure, Not Theory</h2>
-        </div>
-        <blockquote class="origin">
-          <p>
-            Before the platform, there was the weight of missed scope, compressed deadlines,
-            and costly lessons. GritForge carries that history quietly and converts it into structure.
-          </p>
-          <p>
-            This is where experience becomes method, and method becomes standard.
-          </p>
-        </blockquote>
-      </div>
-    </section>
-
-    <section id="gateway" class="section gateway" aria-label="Consulting gateway">
-      <div class="container gateway-inner">
-        <div>
-          <p class="eyebrow">Gateway</p>
-          <h2>Deploy the Method With GritForge Consultants</h2>
-          <p>When immediate estimating support is required, engage the consulting arm without diluting platform standards.</p>
-        </div>
-        <a class="btn btn-primary" href="https://gritforgeconsultants.com" target="_blank" rel="noopener">Enter Consulting Gateway</a>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <div>
-        <p class="footer-brand">GRITFORGE</p>
-        <p class="small">Preconstruction Intelligence Platform for Construction</p>
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <img src="GF_Smoke_watermark_v2.png" alt="GritForge" style="height:60px;width:auto;" />
+        </div>
+        <div class="motto">Built by contractors for the real world</div>
       </div>
-      <div class="footer-links">
-        <a href="#platform">Platform</a>
-        <a href="#engine">Bid Engine</a>
-        <a href="#method">Methodology</a>
-        <a href="#ecosystem">Ecosystem</a>
-      </div>
-      <p class="small">� <span id="year"></span> GritForge. All rights reserved.</p>
     </div>
   </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
