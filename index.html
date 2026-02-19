@@ -603,6 +603,69 @@
     .row span{ color: var(--muted2); }
     .row b{ font-family: var(--mono); font-weight: 700; letter-spacing: .03em; }
 
+    /* contact form */
+    .contact-form{
+      margin-top: 14px;
+    }
+    .form-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap: 5px;
+    }
+    .field.full{
+      grid-column: 1 / -1;
+    }
+    .field label{
+      font-size: 11px;
+      color: var(--muted2);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+    }
+    .field input,
+    .field select,
+    .field textarea{
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line2);
+      background: #121417;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      width: 100%;
+    }
+    .field select{
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237f848b'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-color: #121417;
+      padding-right: 28px;
+      cursor: pointer;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      outline: none;
+      border-color: var(--accent);
+    }
+    .field textarea{
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.45;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color: var(--muted2);
+      opacity: .6;
+    }
+
     .state-select{
       font-family: var(--mono);
       font-weight: 700;
@@ -802,6 +865,10 @@
         font-size: 12px;
       }
 
+      .form-grid{
+        grid-template-columns: 1fr;
+      }
+
       footer{
         padding: 18px 0 30px;
       }
@@ -828,7 +895,7 @@
     "description": "Preconstruction intelligence and bid support. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation.",
     "url": "https://gritforgeconsultants.com",
     "logo": "https://gritforgeconsultants.com/GF_Logo_v3.png",
-    "email": "gritforgeconsultants@gmail.com",
+    "email": "arron@gritforgeconsultants.com",
     "areaServed": {
       "@type": "Country",
       "name": "United States"
@@ -1131,46 +1198,72 @@
         <div class="contact">
           <div class="box">
             <h4 style="margin-top:0;">Let's talk</h4>
-            <p style="margin:0;color:var(--muted2);line-height:1.5;">
-              Send the plan set (or invite link), the due date, and a short note on project type. We'll reply with next steps.
+            <p style="margin:0 0 6px;color:var(--muted2);line-height:1.5;">
+              Send plans (or invite link), your due date, and a short note. We'll reply with next steps.
+            </p>
+            <p style="margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted2);">
+              Direct: <a href="mailto:arron@gritforgeconsultants.com" style="color:var(--muted);">arron@gritforgeconsultants.com</a>
             </p>
 
-            <div class="contact-details">
-              <div class="row">
-                <span>Email</span>
-                <b><a href="mailto:gritforgeconsultants@gmail.com">gritforgeconsultants@gmail.com</a></b>
-              </div>
-              <div class="row">
-                <span>Region</span>
-                <select class="state-select" aria-label="Select state">
-                  <option value="">Select State</option>
-                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
-                  <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
-                  <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
-                  <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
-                  <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
-                  <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
-                  <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
-                  <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
-                  <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
-                  <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
-                  <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
-                  <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
-                  <option>WI</option><option>WY</option>
-                </select>
-              </div>
-              <div class="row">
-                <span>Support</span>
-                <b>Remote Available</b>
-              </div>
-            </div>
+            <form class="contact-form" action="https://formsubmit.co/arron@gritforgeconsultants.com" method="POST">
+              <input type="hidden" name="_subject" value="New Bid Support Request — GritForge">
+              <input type="hidden" name="_next" value="https://gritforgeconsultants.com/">
+              <input type="hidden" name="_captcha" value="false">
 
-            <div class="hero-actions" style="margin-top:14px;">
-              <a class="btn primary" href="mailto:gritforgeconsultants@gmail.com?subject=Bid%20Support%20Request&body=Project%20name%3A%0D%0ABid%20due%20date%3A%0D%0AProject%20type%20(steel%2Fwood)%3A%0D%0APlan%20set%20link%2Fattachment%3A%0D%0ANotes%3A">
-                Email Us <span aria-hidden="true">→</span>
-              </a>
-              <a class="btn" href="#services">Review services</a>
-            </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="cf-name">Name</label>
+                  <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="field">
+                  <label for="cf-email">Email</label>
+                  <input type="email" id="cf-email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="field">
+                  <label for="cf-state">State</label>
+                  <select id="cf-state" name="state">
+                    <option value="">Select State</option>
+                    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                    <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                    <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                    <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                    <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                    <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                    <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                    <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                    <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                    <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                    <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                    <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                    <option>WI</option><option>WY</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="cf-type">Project Type</label>
+                  <select id="cf-type" name="project_type">
+                    <option value="">Select type</option>
+                    <option>Structural Steel</option>
+                    <option>Wood Framing</option>
+                    <option>Both</option>
+                    <option>Consulting</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="cf-date">Bid Due Date</label>
+                  <input type="text" id="cf-date" name="bid_due_date" placeholder="MM/DD/YYYY">
+                </div>
+                <div class="field full">
+                  <label for="cf-message">Notes</label>
+                  <textarea id="cf-message" name="message" placeholder="Project name, plan set link, scope details..."></textarea>
+                </div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <button type="submit" class="btn primary" style="width:100%;justify-content:center;cursor:pointer;border:none;">
+                  Send Request <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </form>
           </div>
 
           <div class="panel">
