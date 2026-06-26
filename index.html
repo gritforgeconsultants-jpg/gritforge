@@ -709,12 +709,94 @@
       color: rgba(255,255,255,.70);
     }
 
+    /* founder section */
+    #founder {
+      padding: 26px 0;
+    }
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .founder-photo-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line2);
+      aspect-ratio: 3/4;
+      cursor: default;
+    }
+    .founder-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(100%) brightness(1.15);
+      transition: filter 0.35s ease;
+    }
+    .founder-photo-wrap:hover img {
+      filter: grayscale(100%) brightness(1.1);
+    }
+    .founder-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .founder-photo-wrap:hover .founder-overlay {
+      opacity: 1;
+    }
+    .founder-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 4px;
+    }
+    .founder-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+    .founder-bio {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 56ch;
+    }
+    .founder-bio + .founder-bio {
+      margin-top: 10px;
+    }
+    .founder-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .founder-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--line2);
+      background: var(--panel);
+      color: var(--muted2);
+    }
+
     /* responsive - tablet */
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .how{ grid-template-columns: 1fr; }
       .contact{ grid-template-columns: 1fr; }
+      .founder-grid{ grid-template-columns: 1fr; }
       nav{ display:none; }
     }
 
@@ -894,7 +976,7 @@
     "description": "Preconstruction intelligence and bid support. Structural steel estimating, wood trade takeoffs, scope gap detection, and defensible bid documentation.",
     "url": "https://gritforgeconsultants.com",
     "logo": "https://gritforgeconsultants.com/GF_Logo_v3.png",
-    "email": "arron@gritforgeconsultants.com",
+    "email": "arron@gritforge.co",
     "areaServed": {
       "@type": "Country",
       "name": "United States"
@@ -921,6 +1003,7 @@
           <a href="#why">Why GritForge</a>
           <a href="#how">How It Works</a>
           <a href="#pricing">Pricing</a>
+          <a href="#founder">About</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -1235,6 +1318,109 @@
       </div>
     </section>
 
+    <section id="founder">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Meet the Founder</h3>
+            <p>Built from the field up — not from behind a desk.</p>
+          </div>
+        </div>
+
+        <div class="founder-grid">
+          <div class="founder-photo-wrap">
+            <img src="arron_fain.jpg" alt="Arron Fain — Founder, GritForge Consultants" />
+            <!-- hover overlay: paint splash on flag stripes -->
+            <svg class="founder-overlay" viewBox="0 0 320 427" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <filter id="brushstroke" x="-5%" y="-150%" width="110%" height="400%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.022 0.09" numOctaves="5" seed="4" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <filter id="splat" x="-60%" y="-60%" width="220%" height="220%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="3" seed="11" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <linearGradient id="stripe-fade" x1="0" y1="0" x2="0" y2="427" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+                  <stop offset="32%"  stop-color="white" stop-opacity="1"/>
+                  <stop offset="44%"  stop-color="white" stop-opacity="0"/>
+                </linearGradient>
+                <mask id="stripe-mask">
+                  <rect width="320" height="427" fill="url(#stripe-fade)"/>
+                </mask>
+              </defs>
+
+              <!-- very subtle wash -->
+              <rect width="320" height="427" fill="#000" opacity="0.08"/>
+
+              <!-- paint strokes aligned to flag's red stripes -->
+              <g mask="url(#stripe-mask)" filter="url(#brushstroke)">
+                <!-- stripe 1 -->
+                <path d="M -8,3 Q 80,0 160,4 Q 245,8 328,2 L 328,19 Q 245,23 160,20 Q 80,17 -8,21 Z" fill="#a12828" opacity="0.86"/>
+                <!-- stripe 3 -->
+                <path d="M -8,43 Q 75,38 160,43 Q 242,48 328,41 L 328,59 Q 242,65 160,61 Q 75,57 -8,62 Z" fill="#a12828" opacity="0.78"/>
+                <!-- stripe 5 -->
+                <path d="M -8,83 Q 78,79 160,83 Q 240,87 328,81 L 328,100 Q 240,105 160,101 Q 78,97 -8,102 Z" fill="#a12828" opacity="0.84"/>
+                <!-- stripe 7 -->
+                <path d="M -8,123 Q 72,118 160,123 Q 244,128 328,121 L 328,140 Q 244,146 160,142 Q 72,138 -8,143 Z" fill="#a12828" opacity="0.76"/>
+                <!-- stripe 9 -->
+                <path d="M -8,163 Q 76,158 160,163 Q 241,168 328,161 L 328,180 Q 241,186 160,182 Q 76,178 -8,183 Z" fill="#a12828" opacity="0.82"/>
+                <!-- stripe 11 -->
+                <path d="M -8,203 Q 74,198 160,203 Q 243,208 328,201 L 328,220 Q 243,226 160,222 Q 74,218 -8,223 Z" fill="#a12828" opacity="0.74"/>
+                <!-- stripe 13 -->
+                <path d="M -8,243 Q 77,238 160,243 Q 241,248 328,241 L 328,260 Q 241,266 160,262 Q 77,258 -8,263 Z" fill="#a12828" opacity="0.80"/>
+              </g>
+
+              <!-- paint splatter dots at stroke ends -->
+              <g mask="url(#stripe-mask)" filter="url(#splat)" fill="#a12828">
+                <circle cx="310" cy="10" r="4.5" opacity="0.75"/>
+                <circle cx="304" cy="4"  r="2"   opacity="0.65"/>
+                <circle cx="316" cy="17" r="2.5" opacity="0.60"/>
+                <circle cx="308" cy="50" r="3.5" opacity="0.70"/>
+                <circle cx="315" cy="44" r="1.8" opacity="0.55"/>
+                <circle cx="8"   cy="90" r="4"   opacity="0.70"/>
+                <circle cx="3"   cy="83" r="2"   opacity="0.60"/>
+                <circle cx="312" cy="90" r="3"   opacity="0.65"/>
+                <circle cx="8"   cy="130" r="3.5" opacity="0.68"/>
+                <circle cx="14"  cy="124" r="1.5" opacity="0.55"/>
+                <circle cx="308" cy="131" r="2.5" opacity="0.62"/>
+                <circle cx="5"   cy="170" r="4"   opacity="0.72"/>
+                <circle cx="12"  cy="163" r="2"   opacity="0.58"/>
+                <circle cx="310" cy="171" r="3"   opacity="0.66"/>
+                <circle cx="7"   cy="210" r="3.5" opacity="0.68"/>
+                <circle cx="313" cy="211" r="2.5" opacity="0.60"/>
+                <circle cx="9"   cy="250" r="4"   opacity="0.74"/>
+                <circle cx="3"   cy="243" r="1.8" opacity="0.55"/>
+                <circle cx="311" cy="251" r="3"   opacity="0.64"/>
+              </g>
+            </svg>
+          </div>
+
+          <div>
+            <div class="founder-name">Arron Fain</div>
+            <div class="founder-title">Founder &amp; Principal — GritForge Consultants</div>
+            <p class="founder-bio">
+              Arron built GritForge out of a simple observation: most estimating problems aren't math problems — they're scope problems. Missing items, unclear assumptions, and proposals that can't hold up when the GC pushes back.
+            </p>
+            <p class="founder-bio">
+              With a background rooted in structural steel and commercial construction, Arron developed the bid workflow and systems that GritForge runs on today — built from real projects, real revisions, and real awarded work across Texas and Colorado.
+            </p>
+            <p class="founder-bio">
+              GritForge is the result of that experience packaged as on-demand preconstruction capacity — the kind most subs can't afford to staff full-time, but can't afford to go without.
+            </p>
+            <div class="founder-tags">
+              <span class="founder-tag">Structural Steel</span>
+              <span class="founder-tag">Commercial Wood Framing</span>
+              <span class="founder-tag">Preconstruction</span>
+              <span class="founder-tag">Bid Strategy</span>
+              <span class="founder-tag">Texas &amp; Colorado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="section-bg">
       <div class="wrap">
         <div class="section-head">
@@ -1251,10 +1437,10 @@
               Send plans (or invite link), your due date, and a short note. We'll reply with next steps.
             </p>
             <p style="margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted2);">
-              Direct: <a href="mailto:arron@gritforgeconsultants.com" style="color:var(--muted);">arron@gritforgeconsultants.com</a>
+              Direct: <a href="mailto:arron@gritforge.co" style="color:var(--muted);">arron@gritforge.co</a>
             </p>
 
-            <form class="contact-form" action="https://formsubmit.co/arron@gritforgeconsultants.com" method="POST">
+            <form class="contact-form" action="https://formsubmit.co/arron@gritforge.co" method="POST">
               <input type="hidden" name="_subject" value="New Bid Support Request — GritForge">
               <input type="hidden" name="_next" value="https://gritforgeconsultants.com/">
               <input type="hidden" name="_captcha" value="false">
@@ -1325,7 +1511,7 @@
               <div class="contact-details" style="margin-top:0;">
                 <div class="row">
                   <span>Email</span>
-                  <b><a href="mailto:arron@gritforgeconsultants.com" style="color:inherit;">arron@gritforgeconsultants.com</a></b>
+                  <b><a href="mailto:arron@gritforge.co" style="color:inherit;">arron@gritforge.co</a></b>
                 </div>
                 <div class="row">
                   <span>Response</span>
