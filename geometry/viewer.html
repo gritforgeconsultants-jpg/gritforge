@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GritForge — Steel Moment Connection</title>
+<meta name="description" content="Interactive AISC beam-to-column moment connection that constructs and deconstructs." />
+<style>
+  :root { --bg:#0e0f11; --panel:#16181c; --line:#2a2d33; --ink:#e7e8ea; --dim:#9a9ea6; --ember:#ff6a1a; --brick:#8b2222; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { display:flex; flex-direction:column; height:100%; }
+  header { padding:16px 22px; border-bottom:1px solid var(--line); display:flex;
+    align-items:baseline; gap:14px; flex-wrap:wrap; }
+  header h1 { font-size:16px; margin:0; letter-spacing:.02em; font-weight:600; }
+  header .sub { color:var(--dim); font-size:13px; }
+  .stage { position:relative; flex:1; min-height:0; }
+  model-viewer { width:100%; height:100%; background:
+    radial-gradient(120% 90% at 65% 35%, #191b1f 0%, #0e0f11 60%, #08090a 100%); }
+  .controls { position:absolute; left:50%; bottom:22px; transform:translateX(-50%);
+    display:flex; gap:10px; padding:8px; background:rgba(18,20,24,.82);
+    border:1px solid var(--line); border-radius:14px; backdrop-filter:blur(8px); }
+  button { appearance:none; border:1px solid var(--line); background:#1d2026; color:var(--ink);
+    padding:9px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer;
+    transition:border-color .15s, background .15s, transform .05s; }
+  button:hover { border-color:#3a3e46; background:#232730; }
+  button:active { transform:translateY(1px); }
+  button.primary { border-color:var(--ember); color:#ffd9c2; background:#241611; }
+  button.primary:hover { background:#2f1a12; }
+  .legend { position:absolute; top:16px; right:18px; display:grid; gap:6px;
+    padding:12px 14px; background:rgba(18,20,24,.72); border:1px solid var(--line);
+    border-radius:12px; font-size:12px; color:var(--dim); max-width:210px; }
+  .legend b { color:var(--ink); font-weight:600; }
+  .legend .row { display:flex; align-items:center; gap:8px; }
+  .sw { width:11px; height:11px; border-radius:3px; flex:none; }
+  a.brand { color:var(--dim); text-decoration:none; margin-left:auto; }
+  a.brand:hover { color:var(--ink); }
+  @media (max-width:560px){ .legend{ display:none; } header h1{ font-size:15px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Steel Moment Connection</h1>
+    <span class="sub">W14×90 column · W18×50 beam · WUF-W · AISC v15</span>
+    <a class="brand" href="https://gritforgeconsultants.com/">GritForge&nbsp;Consultants</a>
+  </header>
+  <div class="stage">
+    <model-viewer
+      id="mv"
+      src="connection.glb"
+      alt="Beam-to-column steel moment connection, exploded and assembled"
+      camera-controls
+      touch-action="pan-y"
+      interaction-prompt="none"
+      shadow-intensity="1.1"
+      shadow-softness="0.9"
+      exposure="1.15"
+      tone-mapping="aces"
+      environment-image="neutral"
+      camera-orbit="38deg 74deg 3.6m"
+      min-camera-orbit="auto auto 1.6m"
+      max-camera-orbit="auto auto 7m"
+      field-of-view="32deg"
+      animation-name="construct">
+    </model-viewer>
+
+    <div class="legend">
+      <div class="row"><span class="sw" style="background:#6b6f75"></span> Column / beam / plates</div>
+      <div class="row"><span class="sw" style="background:#b8bcc2"></span> A325 bolts</div>
+      <div class="row"><span class="sw" style="background:#ff6a1a"></span> CJP / fillet welds</div>
+      <div style="margin-top:6px">Drag to orbit · scroll to zoom.</div>
+    </div>
+
+    <div class="controls">
+      <button id="construct" class="primary">▶ Construct</button>
+      <button id="deconstruct">◀ Deconstruct</button>
+      <button id="loop">↻ Loop: off</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="vendor/model-viewer.min.js"></script>
+<script>
+  const mv = document.getElementById('mv');
+  const bC = document.getElementById('construct');
+  const bD = document.getElementById('deconstruct');
+  const bL = document.getElementById('loop');
+  let looping = false;
+
+  function play(name){
+    mv.setAttribute('animation-name', name);
+    // Rewind then play the chosen clip once.
+    mv.currentTime = 0;
+    mv.timeScale = 1;
+    mv.play({ repetitions: looping ? Infinity : 1 });
+    bC.classList.toggle('primary', name === 'construct');
+    bD.classList.toggle('primary', name === 'deconstruct');
+  }
+  bC.addEventListener('click', () => play('construct'));
+  bD.addEventListener('click', () => play('deconstruct'));
+  bL.addEventListener('click', () => {
+    looping = !looping;
+    bL.textContent = '↻ Loop: ' + (looping ? 'on' : 'off');
+    mv.play({ repetitions: looping ? Infinity : 1 });
+  });
+
+  mv.addEventListener('load', () => {
+    // Start seated (assembled), then run the construct clip once for a clean intro.
+    mv.autoplay = true;
+    play('construct');
+  });
+</script>
+</body>
+</html>
