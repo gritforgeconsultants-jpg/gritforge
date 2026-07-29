@@ -96,16 +96,20 @@
   .viewer .tag{position:absolute;left:16px;top:14px;font-size:11.5px;
     letter-spacing:.06em;color:var(--dim);text-transform:uppercase;font-weight:700}
   .viewer .tag b{color:var(--ember-2)}
-  .viewer .ctrls{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
-    display:flex;gap:8px;padding:7px;border-radius:13px;border:1px solid var(--line);
-    background:rgba(14,16,19,.82);backdrop-filter:blur(8px)}
-  .viewer .ctrls button{font-size:12.5px;padding:8px 13px;border-radius:9px;
-    border:1px solid var(--line);background:#1a1e24;color:var(--ink);font-weight:700;
-    cursor:pointer;transition:.14s}
-  .viewer .ctrls button:hover{background:#232830}
-  .viewer .ctrls button.on{background:#241510;border-color:var(--ember);color:#ffd9c6}
-  .viewer .hint{position:absolute;right:14px;bottom:16px;font-size:11px;
-    color:var(--faint)}
+  .viewer .cue{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:9px;padding:9px 15px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(14,16,19,.82);backdrop-filter:blur(8px);
+    font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--dim);
+    transition:opacity .3s,color .2s;pointer-events:none}
+  .viewer.assembled .cue{color:var(--ember-2)}
+  .viewer .cue .pulse{width:8px;height:8px;border-radius:50%;background:var(--ember);
+    box-shadow:0 0 0 0 rgba(255,90,31,.5);animation:pulse 2s infinite}
+  .viewer.assembled .cue .pulse{animation:none;box-shadow:0 0 8px 1px rgba(255,90,31,.7)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,90,31,.5)}
+    70%{box-shadow:0 0 0 9px rgba(255,90,31,0)}100%{box-shadow:0 0 0 0 rgba(255,90,31,0)}}
+  .viewer .hint{position:absolute;right:14px;bottom:18px;font-size:11px;
+    color:var(--faint);pointer-events:none}
+  @media (prefers-reduced-motion:reduce){.viewer .cue .pulse{animation:none}}
 
   /* ---- logo ticker / stats ---- */
   .band{border-bottom:1px solid var(--line);background:var(--panel)}
@@ -271,13 +275,9 @@
             exposure="1.12" tone-mapping="aces" environment-image="neutral"
             camera-orbit="34deg 74deg 3.7m"
             min-camera-orbit="auto auto 1.8m" max-camera-orbit="auto auto 7m"
-            field-of-view="30deg" animation-name="construct" autoplay>
+            field-of-view="30deg" animation-name="construct">
           </model-viewer>
-          <div class="ctrls">
-            <button id="b-con" class="on">▶ Construct</button>
-            <button id="b-dec">◀ Deconstruct</button>
-            <button id="b-loop">↻ Loop</button>
-          </div>
+          <div class="cue" id="cue"><span class="pulse"></span><span id="cue-text">Hover to assemble</span></div>
           <div class="hint">drag to orbit</div>
         </div>
       </div>
@@ -471,29 +471,75 @@
 
 <script type="module" src="../geometry/vendor/model-viewer.min.js"></script>
 <script>
+  // ---- Hover-driven construct / deconstruct -------------------------------
+  // The "construct" clip runs parked (exploded) -> seated (assembled) over its
+  // first ~5s. We keep the model paused and scrub its currentTime with an eased
+  // progress value: pointer over -> assemble, pointer out -> explode. Fully
+  // reversible, even if the pointer leaves mid-assembly.
   const mv = document.getElementById('mv');
-  const bc = document.getElementById('b-con');
-  const bd = document.getElementById('b-dec');
-  const bl = document.getElementById('b-loop');
-  let looping = false;
+  const viewer = document.querySelector('.viewer');
+  const cueText = document.getElementById('cue-text');
+  const ASSEMBLE_T = 5.0;     // clip seconds that span parked -> fully seated
+  const RAMP = 1.6;           // wall-clock seconds for a full assemble/explode
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarse = matchMedia('(hover: none), (pointer: coarse)').matches;
 
-  function play(name){
-    mv.setAttribute('animation-name', name);
-    mv.currentTime = 0;
-    mv.play({ repetitions: looping ? Infinity : 1 });
-    bc.classList.toggle('on', name === 'construct');
-    bd.classList.toggle('on', name === 'deconstruct');
+  let p = 0;                  // 0 = exploded, 1 = assembled
+  let target = 0, raf = 0, last = 0;
+  const easeInOut = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+
+  let wasOn = null;
+  function apply(){
+    mv.currentTime = easeInOut(p) * ASSEMBLE_T;
+    const on = p > 0.5;
+    viewer.classList.toggle('assembled', on);
+    if (on !== wasOn && !reduce){
+      wasOn = on;
+      if (coarse) cueText.textContent = on ? 'Tap to explode' : 'Tap to assemble';
+      else cueText.textContent = on ? 'Move away to explode' : 'Hover to assemble';
+    }
   }
-  bc.addEventListener('click', () => play('construct'));
-  bd.addEventListener('click', () => play('deconstruct'));
-  bl.addEventListener('click', () => {
-    looping = !looping;
-    bl.classList.toggle('on', looping);
-    mv.play({ repetitions: looping ? Infinity : 1 });
-  });
-  mv.addEventListener('load', () => play('construct'));
+  function tick(now){
+    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    const dir = Math.sign(target - p);
+    p += dir * dt / RAMP;
+    if ((dir > 0 && p >= target) || (dir < 0 && p <= target) || dir === 0){
+      p = target; apply(); raf = 0; return;
+    }
+    apply();
+    raf = requestAnimationFrame(tick);
+  }
+  function goto(t){
+    target = t;
+    if (reduce){ p = t; apply(); return; }
+    if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
+  }
 
-  // Simple mobile menu: jump to contact for the placeholder ☰.
+  function init(){
+    mv.animationName = 'construct';
+    try { mv.pause(); } catch (e) {}
+    p = reduce ? 1 : 0; target = p; apply();     // rest = exploded (or assembled if reduced motion)
+    if (reduce){ viewer.classList.add('assembled'); cueText.textContent = 'Assembled'; }
+    else cueText.textContent = coarse ? 'Tap to assemble' : 'Hover to assemble';
+  }
+  mv.addEventListener('load', init);
+
+  if (coarse){
+    // Touch: tap toggles assemble / explode.
+    viewer.addEventListener('pointerup', () => {
+      const next = target > 0.5 ? 0 : 1;
+      goto(next);
+      cueText.textContent = next ? 'Tap to explode' : 'Tap to assemble';
+    });
+  } else {
+    viewer.addEventListener('pointerenter', () => goto(1));
+    viewer.addEventListener('pointerleave', () => goto(0));
+    // Keyboard accessibility: focusing the viewer assembles it.
+    mv.addEventListener('focus', () => goto(1));
+    mv.addEventListener('blur', () => goto(0));
+  }
+
+  // Placeholder ☰ menu jumps to contact.
   document.querySelector('.menu-btn').addEventListener('click',
     () => location.hash = '#contact');
 </script>
