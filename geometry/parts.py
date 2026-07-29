@@ -130,7 +130,7 @@ def beam() -> Part:
     m.apply_transform(_mat(_R_BEAM, (x_face + BEAM_LENGTH / 2.0, 0, 0)))
     # Web holes for the shear-tab bolts.
     m = _drill(m, _bolt_points(x_face), "z", HOLE_DIA, sh.bf * 2)
-    return Part("beam", m, explode=(34, 0, 0), seq=4)
+    return Part("beam", m, explode=(30, 0, 0), seq=4)
 
 
 # --------------------------------------------------------------------------- #
@@ -154,7 +154,7 @@ def continuity_plate(level: str) -> Part:
         engine="manifold",
     )
     return Part(f"continuity_plate_{level}", plate,
-                explode=(13, 4 if level == "top" else -4, 0), seq=2)
+                explode=(15, 13 if level == "top" else -13, 2), seq=2)
 
 
 def doubler() -> Part:
@@ -165,7 +165,7 @@ def doubler() -> Part:
     ly = bm.d + 1.0
     z = col.tw / 2.0 + DOUBLER_THK / 2.0
     plate = _box(lx, ly, DOUBLER_THK, (0, 0, z))
-    return Part("doubler", plate, explode=(0, 0, 11), seq=1)
+    return Part("doubler", plate, explode=(0, 0, 22), seq=1)
 
 
 # --------------------------------------------------------------------------- #
@@ -186,7 +186,7 @@ def shear_tab() -> Part:
     z = bm.tw / 2.0 + TAB_THK / 2.0
     plate = _box(TAB_WIDTH, TAB_HEIGHT, TAB_THK, (x_face + TAB_WIDTH / 2.0, 0, z))
     plate = _drill(plate, _bolt_points(x_face), "z", HOLE_DIA, TAB_THK * 4)
-    return Part("shear_tab", plate, explode=(20, 0, 3.5), seq=3)
+    return Part("shear_tab", plate, explode=(20, 0, 13), seq=3)
 
 
 def backing_bar(level: str) -> Part:
@@ -198,7 +198,7 @@ def backing_bar(level: str) -> Part:
     bar = _box(BACKING_W, BACKING_THK, bm.bf + 0.5,
                (x_face + 0.1, y, 0))
     return Part(f"backing_bar_{level}", bar, kind="steel",
-                explode=(9, 5 if level == "top" else -5, 0), seq=2)
+                explode=(11, 24 if level == "top" else -24, 6), seq=2)
 
 
 def bolt(index: int) -> Part:
@@ -220,8 +220,9 @@ def bolt(index: int) -> Part:
     b = trimesh.util.concatenate([shank, head, nut])
     # Orient along Z (already) and drop it on the bolt line, head on the -Z side.
     b.apply_translation((cx, cy, (z0 + z1) / 2.0))
+    # Fan the bolts out diagonally so each one reads separately when exploded.
     return Part(f"bolt_{index}", b, kind="bolt",
-                explode=(26, 0, -6), seq=5)
+                explode=(22 + index * 2.0, (index - 1.5) * 3.0, -16), seq=5)
 
 
 def weld_bead(name: str, start, end, size: float = 0.5) -> Part:

@@ -30,10 +30,13 @@ SEAT = 1.8          # time a single part takes to travel
 SEQ_MAX = 6
 
 # PBR materials -------------------------------------------------------------- #
-_STEEL = dict(baseColorFactor=[0.32, 0.33, 0.35, 1.0], metallic=1.0, rough=0.55)
-_BOLT = dict(baseColorFactor=[0.55, 0.56, 0.58, 1.0], metallic=1.0, rough=0.35)
-_WELD = dict(baseColorFactor=[0.95, 0.35, 0.08, 1.0], metallic=0.6, rough=0.4,
-             emissive=[1.0, 0.42, 0.10], emissive_strength=6.0)
+# Raw structural steel: dark, slightly blue mill-scale, high roughness so it
+# reads as hot-rolled steel rather than polished chrome. Bolts are a touch
+# lighter and smoother (machined). Welds glow molten orange.
+_STEEL = dict(baseColorFactor=[0.135, 0.142, 0.155, 1.0], metallic=0.90, rough=0.66)
+_BOLT = dict(baseColorFactor=[0.30, 0.305, 0.32, 1.0], metallic=1.0, rough=0.42)
+_WELD = dict(baseColorFactor=[0.95, 0.32, 0.06, 1.0], metallic=0.5, rough=0.45,
+             emissive=[1.0, 0.40, 0.09], emissive_strength=7.0)
 
 
 class _GLB:

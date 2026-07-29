@@ -4,281 +4,310 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Prima — Reliable Manufacturing for the New Industrial Order</title>
-<meta name="description" content="Prima delivers certified cross-border structural steel, modular assemblies, and mission-critical components for North America's AI infrastructure, energy, and reshoring buildout. AISC-certified, AWS D1.1." />
-<meta name="theme-color" content="#0b0c0e" />
+<meta name="description" content="Prima delivers certified cross-border structural steel, modular assemblies, and mission-critical components for North America's most critical projects. AISC-certified, AWS D1.1." />
+<meta name="theme-color" content="#0a0a0b" />
 <meta property="og:title" content="Prima — Reliable Manufacturing for the New Industrial Order" />
 <meta property="og:description" content="Certified cross-border structural steel fabrication. US ⇄ Mexico. AISC-certified, AWS D1.1." />
 <meta property="og:type" content="website" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='14' fill='%230b0c0e'/><path d='M26 24h34a18 18 0 0 1 0 36H42v16H26z' fill='none' stroke='%23ff5a1f' stroke-width='9'/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0b'/><g fill='%23f0454e'><path d='M20 20h13l-5 60H15z'/><path d='M40 20h13l-5 60H35z'/><path d='M60 20h13l-5 60H55z'/></g></svg>" />
 <style>
-  /* ------------------------------------------------------------------ *
-   *  BRAND TOKENS — swap these for Prima's official palette + logo.
-   *  Accent is set to a molten-steel ember that ties to the weld glow
-   *  in the 3D model. Replace --ember / --ink / --base with the real
-   *  brand hex codes and drop the official SVG into <div class="mark">.
-   * ------------------------------------------------------------------ */
   :root{
-    --base:#0b0c0e;        /* page background            */
-    --panel:#111317;       /* raised surfaces            */
-    --panel-2:#161a1f;     /* cards                      */
-    --line:#242830;        /* hairlines / borders        */
-    --ink:#f3f4f6;         /* primary text               */
-    --dim:#9aa0a8;         /* secondary text             */
-    --faint:#6b7178;       /* tertiary text              */
-    --ember:#ff5a1f;       /* primary accent (weld glow) */
-    --ember-2:#ff8a3d;     /* accent highlight           */
-    --steel:#7f93a6;       /* cool secondary             */
-    --ok:#59c07a;
-    --maxw:1200px;
-    --r:14px;
-    --font:"Helvetica Neue",Helvetica,Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    /* --- Prima brand --- */
+    --red:#f0454e;         /* primary brand accent          */
+    --red-2:#ff5c64;       /* hover / light                 */
+    --red-deep:#c8313a;    /* pressed                       */
+    --molten:#ff6a1a;      /* weld / spark glow (hot steel) */
+    /* --- industrial neutrals --- */
+    --base:#0a0a0b;
+    --base-2:#0d0e10;
+    --panel:#111214;
+    --panel-2:#15171a;
+    --line:#242629;
+    --line-2:#33363b;
+    --ink:#f4f5f6;
+    --dim:#9a9ea4;
+    --faint:#63676d;
+    --steel:#7e8b99;
+    --maxw:1220px;
+    --r:6px;
+    --sans:"Helvetica Neue","Arial Black",Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular","Roboto Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--base);color:var(--ink);font-family:var(--font);
-    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--base);color:var(--ink);font-family:var(--sans);
+    line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  /* fine film grain over everything */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+    opacity:.045;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  section{position:relative}
-  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--ember-2);font-weight:700}
-  h1,h2,h3{letter-spacing:-.02em;line-height:1.05;font-weight:800}
-  .muted{color:var(--dim)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--red);font-weight:600;display:inline-flex;
+    align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--red)}
+  h1,h2,h3{letter-spacing:-.025em;line-height:.98;font-weight:800;text-transform:none}
+  .hazard{height:7px;width:100%;
+    background:repeating-linear-gradient(-45deg,#101113 0 14px,#1a1b1e 14px 28px);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 
-  /* ---- top nav ---- */
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-    background:rgba(11,12,14,.72);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;gap:28px;height:66px}
-  .mark{display:flex;align-items:center;gap:11px;font-weight:800;
-    letter-spacing:.24em;font-size:18px}
-  .mark svg{display:block}
-  .mark .tm{color:var(--faint);font-size:9px;letter-spacing:.1em;
-    align-self:flex-start;margin-top:2px}
-  nav .links{display:flex;gap:26px;margin-left:auto}
-  nav .links a{font-size:13.5px;color:var(--dim);font-weight:600;
-    letter-spacing:.01em;transition:color .15s}
+  /* ---------------- NAV ---------------- */
+  header{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);
+    background:rgba(10,10,11,.8);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;gap:34px;height:70px}
+  .mark{display:flex;align-items:center;gap:12px;color:var(--ink)}
+  .mark svg{display:block;width:30px;height:30px}
+  .mark .name{font-weight:800;font-size:24px;letter-spacing:-.02em}
+  nav .links{display:flex;align-items:center;gap:26px;margin-left:20px}
+  nav .links a{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim);font-weight:500;transition:color .15s}
   nav .links a:hover{color:var(--ink)}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;
-    font-size:13.5px;letter-spacing:.01em;padding:11px 18px;border-radius:10px;
-    border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
-    cursor:pointer;transition:.15s;white-space:nowrap}
-  .btn:hover{border-color:#39404a;background:#1c2128;transform:translateY(-1px)}
-  .btn.accent{background:var(--ember);border-color:var(--ember);color:#160a04}
-  .btn.accent:hover{background:var(--ember-2);border-color:var(--ember-2)}
-  .btn.ghost{background:transparent}
-  .navcta{margin-left:4px}
-  .menu-btn{display:none}
+  nav .links .sep{width:1px;height:18px;background:var(--line-2)}
+  nav .right{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+    font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    padding:13px 20px;border-radius:var(--r);border:1px solid var(--line-2);
+    background:transparent;color:var(--ink);cursor:pointer;transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--steel);background:#17191c}
+  .btn.red{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.red:hover{background:var(--red-2);border-color:var(--red-2)}
+  .menu-btn{display:none;font-size:18px;padding:10px 13px}
 
-  /* ---- hero ---- */
-  .hero{border-bottom:1px solid var(--line);
+  /* ---------------- HERO ---------------- */
+  .hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden;
     background:
-      radial-gradient(120% 80% at 78% 30%, rgba(255,90,31,.10) 0%, rgba(255,90,31,0) 55%),
-      radial-gradient(90% 90% at 12% 8%, rgba(127,147,166,.10) 0%, rgba(127,147,166,0) 50%);
-    overflow:hidden}
-  .hero .grid{display:grid;grid-template-columns:1.02fr 1.12fr;gap:36px;
-    align-items:center;padding:64px 0 54px}
-  .hero h1{font-size:clamp(34px,5vw,60px)}
-  .hero h1 .em{color:var(--ember)}
-  .hero p.lede{margin-top:20px;font-size:17.5px;color:var(--dim);max-width:34em}
-  .hero .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-  .trust{display:flex;gap:18px;align-items:center;margin-top:26px;flex-wrap:wrap;
-    color:var(--faint);font-size:12.5px;font-weight:600;letter-spacing:.04em}
-  .trust b{color:var(--steel)}
-  .trust .dot{width:4px;height:4px;border-radius:50%;background:var(--line)}
+      radial-gradient(115% 80% at 74% 34%, rgba(240,69,78,.10) 0%, transparent 52%),
+      linear-gradient(#0a0a0b,#0c0d0f)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(120% 100% at 30% 40%,#000 30%,transparent 78%)}
+  .hero .grid{position:relative;display:grid;grid-template-columns:.98fr 1.18fr;
+    gap:40px;align-items:center;padding:70px 0 60px}
+  .hero h1{font-size:clamp(38px,5.6vw,68px)}
+  .hero h1 .red{color:var(--red)}
+  .hero .lede{margin-top:22px;font-size:17px;color:var(--dim);max-width:36em;line-height:1.55}
+  .hero .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .hero .btn{padding:15px 24px;font-size:12.5px}
+  .trust{display:flex;gap:16px;align-items:center;margin-top:30px;flex-wrap:wrap;
+    font-family:var(--mono);color:var(--faint);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase}
+  .trust b{color:var(--steel);font-weight:600}
+  .trust .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
 
-  /* ---- viewer ---- */
-  .viewer{position:relative;border:1px solid var(--line);border-radius:var(--r);
+  /* ---------------- VIEWER ---------------- */
+  .viewer{position:relative;border:1px solid var(--line-2);border-radius:var(--r);
     overflow:hidden;background:
-      radial-gradient(120% 90% at 65% 35%, #191c21 0%, #0d0f12 60%, #08090a 100%);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.8),
-      inset 0 1px 0 rgba(255,255,255,.03)}
-  model-viewer{width:100%;height:520px;display:block;--poster-color:transparent}
-  .viewer .tag{position:absolute;left:16px;top:14px;font-size:11.5px;
-    letter-spacing:.06em;color:var(--dim);text-transform:uppercase;font-weight:700}
-  .viewer .tag b{color:var(--ember-2)}
-  .viewer .cue{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
-    display:flex;align-items:center;gap:9px;padding:9px 15px;border-radius:999px;
-    border:1px solid var(--line);background:rgba(14,16,19,.82);backdrop-filter:blur(8px);
-    font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--dim);
-    transition:opacity .3s,color .2s;pointer-events:none}
-  .viewer.assembled .cue{color:var(--ember-2)}
-  .viewer .cue .pulse{width:8px;height:8px;border-radius:50%;background:var(--ember);
-    box-shadow:0 0 0 0 rgba(255,90,31,.5);animation:pulse 2s infinite}
-  .viewer.assembled .cue .pulse{animation:none;box-shadow:0 0 8px 1px rgba(255,90,31,.7)}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,90,31,.5)}
-    70%{box-shadow:0 0 0 9px rgba(255,90,31,0)}100%{box-shadow:0 0 0 0 rgba(255,90,31,0)}}
-  .viewer .hint{position:absolute;right:14px;bottom:18px;font-size:11px;
-    color:var(--faint);pointer-events:none}
-  @media (prefers-reduced-motion:reduce){.viewer .cue .pulse{animation:none}}
+      radial-gradient(130% 100% at 60% 40%, #16181b 0%, #0c0d0f 58%, #08080a 100%);
+    box-shadow:0 40px 90px -34px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.03)}
+  model-viewer{width:100%;height:560px;display:block;--poster-color:transparent}
+  .sparks{position:absolute;inset:0;pointer-events:none;z-index:3}
+  .viewer .tag{position:absolute;left:16px;top:14px;z-index:4;font-family:var(--mono);
+    font-size:10.5px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+  .viewer .tag b{color:var(--red)}
+  .viewer .hint{position:absolute;right:15px;bottom:14px;z-index:4;font-family:var(--mono);
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .viewer .status{position:absolute;left:16px;bottom:14px;z-index:4;font-family:var(--mono);
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);
+    display:flex;align-items:center;gap:8px}
+  .viewer .status .led{width:7px;height:7px;border-radius:50%;background:var(--faint);
+    transition:.25s}
+  .viewer.assembled .status .led{background:var(--molten);
+    box-shadow:0 0 9px 1px rgba(255,106,26,.8)}
+  .viewer.assembled .status{color:var(--steel)}
+  /* decorative bolt heads in the plate corners */
+  .viewer .rivet{position:absolute;z-index:4;width:11px;height:11px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%,#3a3d42,#141517 70%);
+    border:1px solid #0c0d0e;box-shadow:inset 0 1px 1px rgba(255,255,255,.12)}
+  .viewer .rivet.tl{left:12px;top:12px}.viewer .rivet.tr{right:12px;top:12px}
+  .viewer .rivet.bl{left:12px;bottom:12px}.viewer .rivet.br{right:12px;bottom:12px}
+  .hs{width:1px;height:1px;opacity:0;pointer-events:none}
 
-  /* ---- logo ticker / stats ---- */
-  .band{border-bottom:1px solid var(--line);background:var(--panel)}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-    background:var(--line);border-left:1px solid var(--line);border-right:1px solid var(--line)}
-  .stat{background:var(--panel);padding:26px 24px}
-  .stat .n{font-size:30px;font-weight:800;letter-spacing:-.02em}
-  .stat .n .u{color:var(--ember);font-size:20px;vertical-align:super}
-  .stat .l{margin-top:4px;font-size:13px;color:var(--dim)}
+  /* ---------------- STATS ---------------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line);background:var(--base-2)}
+  .stat{padding:28px 26px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:none}
+  .stat .n{font-size:32px;font-weight:800;letter-spacing:-.03em}
+  .stat .n .u{color:var(--red);font-size:20px;vertical-align:super}
+  .stat .l{margin-top:5px;font-family:var(--mono);font-size:11px;color:var(--dim);
+    letter-spacing:.04em;text-transform:uppercase;line-height:1.5}
 
-  /* ---- generic section ---- */
-  .sec{padding:78px 0}
-  .sec-head{max-width:620px}
-  .sec-head h2{font-size:clamp(26px,3.4vw,38px);margin-top:12px}
-  .sec-head p{margin-top:14px;color:var(--dim);font-size:16px}
+  /* ---------------- SECTIONS ---------------- */
+  .sec{padding:84px 0}
+  .sec-head{max-width:660px}
+  .sec-head h2{font-size:clamp(28px,3.6vw,42px);margin-top:14px}
+  .sec-head p{margin-top:16px;color:var(--dim);font-size:16px;line-height:1.6}
 
-  /* ---- capabilities ---- */
-  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
-  .card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);
-    padding:22px;transition:.18s}
-  .card:hover{border-color:#39404a;transform:translateY(-3px);
-    box-shadow:0 20px 40px -24px rgba(0,0,0,.7)}
-  .card .ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
-    background:#1d2229;border:1px solid var(--line);margin-bottom:16px}
-  .card .ic svg{width:22px;height:22px;stroke:var(--ember);fill:none;stroke-width:1.7}
-  .card h3{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
-  .card p{margin-top:8px;font-size:13.5px;color:var(--dim);line-height:1.5}
+  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+  .card{position:relative;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--r);padding:24px;transition:.18s;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;
+    background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .card:hover{border-color:var(--line-2);transform:translateY(-3px)}
+  .card:hover::before{transform:scaleX(1)}
+  .card .ic{width:44px;height:44px;border-radius:var(--r);display:grid;place-items:center;
+    background:#191b1e;border:1px solid var(--line);margin-bottom:18px}
+  .card .ic svg{width:22px;height:22px;stroke:var(--red);fill:none;stroke-width:1.6}
+  .card .no{position:absolute;top:20px;right:22px;font-family:var(--mono);font-size:11px;
+    color:var(--faint);letter-spacing:.1em}
+  .card h3{font-size:16px;font-weight:800;letter-spacing:-.01em}
+  .card p{margin-top:9px;font-size:13.5px;color:var(--dim);line-height:1.55}
 
-  /* ---- sectors ---- */
-  .sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
   .sector{position:relative;border:1px solid var(--line);border-radius:var(--r);
-    padding:26px;overflow:hidden;background:var(--panel-2);min-height:230px;
+    padding:28px;overflow:hidden;background:var(--panel);min-height:236px;
     display:flex;flex-direction:column;justify-content:flex-end}
-  .sector .k{position:absolute;top:20px;left:26px;font-size:12px;font-weight:800;
-    letter-spacing:.14em;color:var(--ember-2)}
-  .sector h3{font-size:21px;font-weight:800}
-  .sector p{margin-top:10px;font-size:13.5px;color:var(--dim)}
+  .sector .k{position:absolute;top:22px;left:28px;font-family:var(--mono);font-size:11px;
+    font-weight:600;letter-spacing:.14em;color:var(--red)}
+  .sector h3{font-size:22px;font-weight:800}
+  .sector p{margin-top:11px;font-size:13.5px;color:var(--dim);line-height:1.55}
   .sector::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(90% 70% at 80% 0%, rgba(255,90,31,.12), transparent 60%)}
+    background:radial-gradient(90% 70% at 82% 0%, rgba(240,69,78,.10), transparent 58%)}
 
-  /* ---- process ---- */
-  .process{background:var(--panel);border-top:1px solid var(--line);
+  .process{background:var(--base-2);border-top:1px solid var(--line);
     border-bottom:1px solid var(--line)}
-  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:44px;
-    background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-  .step{background:var(--panel);padding:24px 20px;position:relative}
-  .step .no{font-size:12px;font-weight:800;color:var(--ember);letter-spacing:.1em}
-  .step h4{margin-top:12px;font-size:15px;font-weight:700}
-  .step p{margin-top:7px;font-size:12.5px;color:var(--dim)}
-  .twin{margin-top:26px;display:flex;gap:12px;align-items:center;color:var(--steel);
-    font-size:13.5px;font-weight:600}
-  .twin svg{width:18px;height:18px;stroke:var(--steel);fill:none;stroke-width:1.7}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:46px;
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .step{background:var(--panel);padding:26px 22px;border-left:1px solid var(--line)}
+  .step:first-child{border-left:none}
+  .step .no{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--red);
+    letter-spacing:.1em}
+  .step h4{margin-top:14px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .step p{margin-top:8px;font-size:12.5px;color:var(--dim);line-height:1.5}
+  .twin{margin-top:28px;display:flex;gap:12px;align-items:center;color:var(--steel);
+    font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .twin svg{width:18px;height:18px;stroke:var(--steel);fill:none;stroke-width:1.6}
 
-  /* ---- certifications ---- */
-  .certs{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .certs{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
   .chip{display:flex;align-items:center;gap:10px;border:1px solid var(--line);
-    background:var(--panel-2);border-radius:999px;padding:11px 18px;font-weight:700;
-    font-size:13.5px;letter-spacing:.02em}
-  .chip .d{width:9px;height:9px;border-radius:50%;background:var(--ember)}
+    background:var(--panel);border-radius:var(--r);padding:12px 18px;
+    font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase}
+  .chip .d{width:8px;height:8px;border-radius:50%;background:var(--red)}
   .chip .d.b{background:var(--steel)}
 
-  /* ---- CTA ---- */
-  .final{padding:86px 0;text-align:center;border-top:1px solid var(--line);
-    background:
-      radial-gradient(70% 120% at 50% 0%, rgba(255,90,31,.14), transparent 60%)}
-  .final h2{font-size:clamp(28px,4vw,44px);max-width:16ch;margin:0 auto}
-  .final p{margin:16px auto 0;color:var(--dim);max-width:52ch;font-size:16px}
-  .final .cta{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .final{position:relative;padding:92px 0;text-align:center;border-top:1px solid var(--line);
+    background:radial-gradient(70% 130% at 50% 0%, rgba(240,69,78,.14), transparent 60%)}
+  .final h2{font-size:clamp(30px,4.4vw,50px);max-width:15ch;margin:0 auto}
+  .final p{margin:18px auto 0;color:var(--dim);max-width:54ch;font-size:16px;line-height:1.6}
+  .final .cta{display:flex;gap:12px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+  .final .btn{padding:15px 26px}
 
-  /* ---- footer ---- */
-  footer{border-top:1px solid var(--line);background:var(--panel);padding:44px 0}
-  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    color:var(--faint);font-size:13px}
-  .foot .cols{display:flex;gap:52px;flex-wrap:wrap}
-  .foot h5{color:var(--dim);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    margin-bottom:12px}
-  .foot a{display:block;color:var(--faint);margin-bottom:8px;transition:.15s}
+  footer{border-top:1px solid var(--line);background:var(--base-2);padding:48px 0 30px}
+  .foot{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap}
+  .foot .about{max-width:300px}
+  .foot .about p{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    line-height:1.7;letter-spacing:.03em}
+  .foot .cols{display:flex;gap:56px;flex-wrap:wrap}
+  .foot h5{font-family:var(--mono);color:var(--dim);font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;margin-bottom:14px}
+  .foot a{display:block;color:var(--faint);margin-bottom:9px;font-size:13px;transition:.15s}
   .foot a:hover{color:var(--ink)}
-  .foot .fine{border-top:1px solid var(--line);margin-top:32px;padding-top:20px;
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-  .note{color:var(--faint);font-size:11.5px}
+  .foot .fine{border-top:1px solid var(--line);margin-top:36px;padding-top:22px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.06em}
 
-  /* ---- responsive ---- */
-  @media (max-width:960px){
-    .hero .grid{grid-template-columns:1fr;gap:26px;padding:44px 0}
+  @media (max-width:1000px){
+    nav .links{display:none}
+    .hero .grid{grid-template-columns:1fr;gap:28px;padding:48px 0}
     .cap-grid{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr)}
-    .stats{grid-template-columns:repeat(2,1fr)}
-    model-viewer{height:440px}
+    .step:nth-child(2){border-left:none}
+    model-viewer{height:460px}
   }
   @media (max-width:640px){
-    nav .links{display:none}
-    .navcta{display:none}
+    .right .btn:not(.menu-btn){display:none}
     .menu-btn{display:inline-flex;margin-left:auto}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(3),.stat:nth-child(1){border-left:none}
     .sectors{grid-template-columns:1fr}
     .cap-grid{grid-template-columns:1fr}
-    .stats{grid-template-columns:repeat(2,1fr)}
     .foot{flex-direction:column}
   }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- ============================ NAV ============================ -->
 <header>
   <div class="wrap">
     <nav>
-      <!-- PLACEHOLDER WORDMARK — replace this SVG lockup with Prima's official logo -->
+      <!-- Prima logo — recreated as SVG; swap for the official asset file. -->
       <a class="mark" href="#top" aria-label="Prima home">
-        <svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true">
-          <rect width="100" height="100" rx="14" fill="#0b0c0e" stroke="#242830"/>
-          <path d="M26 24h34a18 18 0 0 1 0 36H42v16H26z" fill="none"
-                stroke="#ff5a1f" stroke-width="9"/>
-        </svg>
-        PRIMA<span class="tm">™</span>
+        <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor">
+          <path d="M20 18h15l-6 64H14z"/><path d="M42 18h15l-6 64H36z"/>
+          <path d="M64 18h15l-6 64H58z"/></g></svg>
+        <span class="name">Prima</span>
       </a>
       <div class="links">
-        <a href="#capabilities">Capabilities</a>
-        <a href="#sectors">Sectors</a>
-        <a href="#process">Process</a>
-        <a href="#certifications">Certifications</a>
+        <a href="#capabilities">What We Build</a>
+        <a href="#sectors">Industries</a>
+        <a href="#process">Platform</a>
         <a href="#contact">Contact</a>
+        <span class="sep"></span>
+        <a href="#certifications">Media</a>
+        <a href="#sectors">Case Studies</a>
       </div>
-      <a class="btn accent navcta" href="#contact">Request a Quote</a>
-      <button class="btn ghost menu-btn" aria-label="Menu">☰</button>
+      <div class="right">
+        <a class="btn red" href="#contact">Request a Quote</a>
+        <button class="btn menu-btn" aria-label="Menu">☰</button>
+      </div>
     </nav>
   </div>
 </header>
 
 <!-- ============================ HERO ============================ -->
-<section class="hero" id="top">
+<section class="hero">
   <div class="wrap">
     <div class="grid">
-      <div class="col">
-        <span class="eyebrow">Cross-border structural steel · US&nbsp;⇄&nbsp;MX</span>
-        <h1>Reliable manufacturing for the <span class="em">new industrial order.</span></h1>
+      <div>
+        <span class="eyebrow">Cross-border structural steel · US ⇄ MX</span>
+        <h1>Reliable Manufacturing for <span class="red">the New Industrial Order</span></h1>
         <p class="lede">
-          Prima delivers certified structural steel, modular assemblies, and
-          mission-critical components for North America's AI-infrastructure,
-          energy, and reshoring buildout — engineered, fabricated, and verified
-          from a single accountable source.
+          Prima delivers certified cross-border steel fabrication for North
+          America's most critical projects — combining U.S. and Mexican capacity
+          for lower landed cost, faster lead times, and reliable execution across
+          structural steel, misc. metals, modular assemblies, and mission-critical
+          components.
         </p>
         <div class="cta">
-          <a class="btn accent" href="#contact">Request a Quote →</a>
-          <a class="btn" href="#capabilities">Explore Capabilities</a>
+          <a class="btn red" href="#contact">Request a Quote →</a>
+          <a class="btn" href="#capabilities">Contact Sales</a>
         </div>
         <div class="trust">
-          <span><b>AISC</b>-Certified Fabrication</span><span class="dot"></span>
-          <span><b>AWS&nbsp;D1.1</b> Welding</span><span class="dot"></span>
-          <span>Full <b>Division&nbsp;5</b> Scope</span>
+          <span><b>AISC</b>-Certified</span><span class="dot"></span>
+          <span><b>AWS D1.1</b> Welding</span><span class="dot"></span>
+          <span>Full <b>Division 5</b> Scope</span>
         </div>
       </div>
 
-      <div class="col">
-        <div class="viewer">
-          <div class="tag"><b>◆</b> Moment connection · construct / deconstruct</div>
+      <div>
+        <div class="viewer" id="viewer">
+          <span class="rivet tl"></span><span class="rivet tr"></span>
+          <span class="rivet bl"></span><span class="rivet br"></span>
+          <div class="tag"><b>◆</b> W14×90 ▸ W18×50 &nbsp;//&nbsp; WUF-W moment connection</div>
           <model-viewer
             id="mv"
             src="../geometry/connection.glb"
-            alt="Steel beam-to-column moment connection, assembling and exploding"
+            alt="Steel beam-to-column moment connection assembling with sparks"
             camera-controls touch-action="pan-y" interaction-prompt="none"
-            shadow-intensity="1.1" shadow-softness="0.9"
-            exposure="1.12" tone-mapping="aces" environment-image="neutral"
-            camera-orbit="34deg 74deg 3.7m"
-            min-camera-orbit="auto auto 1.8m" max-camera-orbit="auto auto 7m"
+            shadow-intensity="1.5" shadow-softness="0.75"
+            exposure="1.02" tone-mapping="aces" environment-image="neutral"
+            camera-target="0.86m 0m 0.05m"
+            camera-orbit="30deg 76deg 5.3m"
+            min-camera-orbit="auto auto 3m" max-camera-orbit="auto auto 9m"
             field-of-view="30deg" animation-name="construct">
+            <div class="hs" slot="hotspot-weld" data-position="0.18m 0m 0m" data-normal="0 0 1"></div>
           </model-viewer>
-          <div class="cue" id="cue"><span class="pulse"></span><span id="cue-text">Hover to assemble</span></div>
-          <div class="hint">drag to orbit</div>
+          <canvas class="sparks" id="sparks"></canvas>
+          <div class="status"><span class="led"></span><span id="stat">Exploded view</span></div>
+          <div class="hint">drag ⟲ orbit</div>
         </div>
       </div>
     </div>
@@ -286,85 +315,71 @@
 </section>
 
 <!-- ============================ STATS ============================ -->
-<section class="band">
-  <div class="wrap" style="padding:0">
-    <div class="stats">
-      <div class="stat"><div class="n">2<span class="u">×</span></div>
-        <div class="l">US + Mexico capacity, one contract</div></div>
-      <div class="stat"><div class="n">D5</div>
-        <div class="l">Full Division 5 &amp; miscellaneous metals</div></div>
-      <div class="stat"><div class="n">100<span class="u">%</span></div>
-        <div class="l">Digital-twin verified before erection</div></div>
-      <div class="stat"><div class="n">0</div>
-        <div class="l">Logistics "black holes" — customs handled</div></div>
-    </div>
-  </div>
-</section>
+<div class="stats">
+  <div class="stat"><div class="n">2<span class="u">×</span></div>
+    <div class="l">US + Mexico capacity,<br>one contract</div></div>
+  <div class="stat"><div class="n">D5</div>
+    <div class="l">Full Division 5 &amp;<br>miscellaneous metals</div></div>
+  <div class="stat"><div class="n">100<span class="u">%</span></div>
+    <div class="l">Digital-twin verified<br>before erection</div></div>
+  <div class="stat"><div class="n">0</div>
+    <div class="l">Logistics black holes —<br>customs handled</div></div>
+</div>
 
 <!-- ========================= CAPABILITIES ========================= -->
 <section class="sec" id="capabilities">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Capabilities</span>
+      <span class="eyebrow">What We Build</span>
       <h2>One accountable source, from ton to tower.</h2>
-      <p>Engineering, detailing, fabrication, cross-border logistics, and
-         erection support — managed end to end so nothing falls between scopes.</p>
+      <p>Engineering, detailing, fabrication, cross-border logistics, and erection
+         support — managed end to end so nothing falls between scopes.</p>
     </div>
     <div class="cap-grid">
-      <div class="card">
+      <div class="card"><span class="no">01</span>
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 4h18M3 20h18M8 4v16M16 4v16M8 12h8"/></svg></div>
         <h3>Structural Steel</h3>
         <p>Beams, columns, trusses, and joists fabricated to AISC standards with
-           full traceability from mill cert to member mark.</p>
-      </div>
-      <div class="card">
+           full traceability from mill cert to member mark.</p></div>
+      <div class="card"><span class="no">02</span>
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V8l8-5 8 5v12M4 20h16M9 20v-6h6v6"/></svg></div>
         <h3>Miscellaneous Metals</h3>
-        <p>Stairs, railings, platforms, embeds, and metal decking — the fiddly
-           scope that makes or breaks an erection schedule.</p>
-      </div>
-      <div class="card">
+        <p>Stairs, railings, platforms, embeds, and metal decking — the scope that
+           makes or breaks an erection schedule.</p></div>
+      <div class="card"><span class="no">03</span>
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></div>
         <h3>Modular Assemblies</h3>
         <p>Pre-assembled, shop-verified modules that compress on-site labor and
-           de-risk field tolerances for fast-track projects.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+           de-risk field tolerances for fast-track work.</p></div>
+      <div class="card"><span class="no">04</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div>
         <h3>Mission-Critical Components</h3>
-        <p>Tight-tolerance, high-consequence hardware for data centers,
-           substations, and energy plants — built right the first time.</p>
-      </div>
+        <p>Tight-tolerance, high-consequence hardware for data centers, substations,
+           and energy plants — built right the first time.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============================ SECTORS ============================ -->
-<section class="sec" id="sectors" style="padding-top:12px">
+<section class="sec" id="sectors" style="padding-top:8px">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Sectors we build for</span>
+      <span class="eyebrow">Industries</span>
       <h2>Where reliable steel is the critical path.</h2>
     </div>
     <div class="sectors">
-      <div class="sector">
-        <span class="k">01 · AI INFRASTRUCTURE</span>
+      <div class="sector"><span class="k">01 · AI INFRASTRUCTURE</span>
         <h3>Hyperscale &amp; compute</h3>
         <p>Structural steel and modular systems for data centers, GPU clusters,
-           fiber POPs, and transmission — matched to the pace of the buildout.</p>
-      </div>
-      <div class="sector">
-        <span class="k">02 · ENERGY</span>
+           fiber POPs, and transmission — matched to the pace of the buildout.</p></div>
+      <div class="sector"><span class="k">02 · ENERGY</span>
         <h3>Grid to plant</h3>
         <p>Utility-grade steel and electrical infrastructure hardware, from
-           substations to power plants, modernizing the national grid.</p>
-      </div>
-      <div class="sector">
-        <span class="k">03 · RESHORING</span>
+           substations to power plants, modernizing the national grid.</p></div>
+      <div class="sector"><span class="k">03 · RESHORING</span>
         <h3>Industrial reshoring</h3>
         <p>Warehouses, production facilities, and industrial infrastructure —
-           delivered without the delay and complexity of ocean freight.</p>
-      </div>
+           delivered without the delay and complexity of ocean freight.</p></div>
     </div>
   </div>
 </section>
@@ -373,7 +388,7 @@
 <section class="process" id="process">
   <div class="wrap sec">
     <div class="sec-head">
-      <span class="eyebrow">The Prima process</span>
+      <span class="eyebrow">The Platform</span>
       <h2>We close the black hole of industrial logistics.</h2>
       <p>Cross-border logistics, multi-modal routing with tariff expertise, and
          customs coordination — so lower landed cost and faster lead times
@@ -393,8 +408,7 @@
     </div>
     <div class="twin">
       <svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg>
-      Every component verified against a digital twin before it ships — placed
-      with precision, the first time.
+      Every component verified against a digital twin before it ships.
     </div>
   </div>
 </section>
@@ -403,10 +417,10 @@
 <section class="sec" id="certifications">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Certifications &amp; standards</span>
+      <span class="eyebrow">Certifications &amp; Standards</span>
       <h2>Certified where it counts.</h2>
-      <p>The connection above — a welded-flange, bolted-web moment connection —
-         is exactly the Division 5 detail Prima fabricates and verifies to code.</p>
+      <p>The connection above — a welded-flange, bolted-web moment connection — is
+         exactly the Division 5 detail Prima fabricates and verifies to code.</p>
     </div>
     <div class="certs">
       <div class="chip"><span class="d"></span> AISC-Certified Fabrication</div>
@@ -418,15 +432,17 @@
   </div>
 </section>
 
+<div class="hazard"></div>
+
 <!-- ============================ FINAL CTA ============================ -->
 <section class="final" id="contact">
   <div class="wrap">
-    <span class="eyebrow">Start a project</span>
+    <span class="eyebrow" style="justify-content:center">Start a Project</span>
     <h2>Put your next critical build on reliable steel.</h2>
-    <p>Send drawings or a scope, and Prima will return budget pricing, lead
-       times, and a landed-cost view across US and Mexico capacity.</p>
+    <p>Send drawings or a scope, and Prima will return budget pricing, lead times,
+       and a landed-cost view across US and Mexico capacity.</p>
     <div class="cta">
-      <a class="btn accent" href="mailto:hello@prima.ai?subject=Project%20inquiry">Request a Quote →</a>
+      <a class="btn red" href="mailto:hello@prima.ai?subject=Project%20inquiry">Request a Quote →</a>
       <a class="btn" href="#capabilities">See Capabilities</a>
     </div>
   </div>
@@ -436,112 +452,169 @@
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div style="max-width:280px">
-        <div class="mark" style="font-size:16px;margin-bottom:12px">
-          <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
-            <rect width="100" height="100" rx="14" fill="#0b0c0e" stroke="#242830"/>
-            <path d="M26 24h34a18 18 0 0 1 0 36H42v16H26z" fill="none"
-                  stroke="#ff5a1f" stroke-width="9"/>
-          </svg>PRIMA
-        </div>
-        <p class="note">Reliable manufacturing for the new industrial order.
-           Certified cross-border structural steel fabrication.</p>
+      <div class="about">
+        <a class="mark" href="#top">
+          <svg viewBox="0 0 100 100" aria-hidden="true" style="width:24px;height:24px"><g fill="currentColor">
+            <path d="M20 18h15l-6 64H14z"/><path d="M42 18h15l-6 64H36z"/>
+            <path d="M64 18h15l-6 64H58z"/></g></svg>
+          <span class="name" style="font-size:20px">Prima</span>
+        </a>
+        <p>Reliable manufacturing for the new industrial order. Certified
+           cross-border structural steel fabrication.</p>
       </div>
       <div class="cols">
-        <div>
-          <h5>Company</h5>
-          <a href="#capabilities">Capabilities</a>
-          <a href="#sectors">Sectors</a>
-          <a href="#process">Process</a>
-        </div>
-        <div>
-          <h5>Build</h5>
+        <div><h5>Company</h5>
+          <a href="#capabilities">What We Build</a>
+          <a href="#sectors">Industries</a>
+          <a href="#process">Platform</a></div>
+        <div><h5>Build</h5>
           <a href="#certifications">Certifications</a>
           <a href="#contact">Request a Quote</a>
-          <a href="../geometry/viewer.html">3D Connection Viewer</a>
-        </div>
+          <a href="../geometry/viewer.html">3D Connection Viewer</a></div>
       </div>
     </div>
     <div class="fine">
-      <span class="note">© 2026 Prima. All rights reserved.</span>
-      <span class="note">Design demo — brand palette &amp; logo are placeholders pending official assets.</span>
+      <span>© 2026 Prima. All rights reserved.</span>
+      <span>Independent design demo · logo &amp; palette recreated from public brand.</span>
     </div>
   </div>
 </footer>
 
 <script type="module" src="../geometry/vendor/model-viewer.min.js"></script>
 <script>
-  // ---- Hover-driven construct / deconstruct -------------------------------
-  // The "construct" clip runs parked (exploded) -> seated (assembled) over its
-  // first ~5s. We keep the model paused and scrub its currentTime with an eased
-  // progress value: pointer over -> assemble, pointer out -> explode. Fully
-  // reversible, even if the pointer leaves mid-assembly.
+(function(){
   const mv = document.getElementById('mv');
-  const viewer = document.querySelector('.viewer');
-  const cueText = document.getElementById('cue-text');
-  const ASSEMBLE_T = 5.0;     // clip seconds that span parked -> fully seated
-  const RAMP = 1.6;           // wall-clock seconds for a full assemble/explode
+  const viewer = document.getElementById('viewer');
+  const statusEl = document.getElementById('stat');
+  const hs = mv.querySelector('.hs');
+  const canvas = document.getElementById('sparks');
+  const ctx = canvas.getContext('2d');
+
+  const ASSEMBLE_T = 5.0;   // clip seconds spanning parked -> fully seated
+  const RAMP = 2.0;         // wall-clock seconds for a full assemble / explode
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const coarse = matchMedia('(hover: none), (pointer: coarse)').matches;
+  const easeInOut = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
 
-  let p = 0;                  // 0 = exploded, 1 = assembled
-  let target = 0, raf = 0, last = 0;
-  const easeInOut = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+  // ---- spark particle system ----
+  let W=0,H=0,DPR=1;
+  function resize(){
+    const r = viewer.getBoundingClientRect();
+    DPR = Math.min(2, window.devicePixelRatio||1);
+    W=r.width; H=r.height;
+    canvas.width=W*DPR; canvas.height=H*DPR;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  new ResizeObserver(resize).observe(viewer);
 
-  let wasOn = null;
-  function apply(){
-    mv.currentTime = easeInOut(p) * ASSEMBLE_T;
-    const on = p > 0.5;
-    viewer.classList.toggle('assembled', on);
-    if (on !== wasOn && !reduce){
-      wasOn = on;
-      if (coarse) cueText.textContent = on ? 'Tap to explode' : 'Tap to assemble';
-      else cueText.textContent = on ? 'Move away to explode' : 'Hover to assemble';
+  const parts = [];
+  function emitter(){
+    // Track the weld point via the model-viewer hotspot so sparks follow the camera.
+    const vr = viewer.getBoundingClientRect();
+    const hr = hs.getBoundingClientRect();
+    if (hr.width || hr.left) return {x:hr.left-vr.left, y:hr.top-vr.top, ok:true};
+    return {x:W*0.34, y:H*0.5, ok:false};
+  }
+  function spawn(n, power){
+    const e = emitter();
+    for(let i=0;i<n;i++){
+      const ang = (-Math.PI/2) + (Math.random()-0.5)*Math.PI*1.35; // fan upward/out
+      const spd = (70 + Math.random()*260) * power;
+      parts.push({
+        x: e.x + (Math.random()-0.5)*6,
+        y: e.y + (Math.random()-0.5)*H*0.34,     // spread along the weld seam
+        vx: Math.cos(ang)*spd*(Math.random()<0.5?-1:1),
+        vy: Math.sin(ang)*spd - 40,
+        life: 0.35 + Math.random()*0.65,
+        age: 0,
+        w: 0.7 + Math.random()*1.8,
+        long: Math.random()<0.18
+      });
     }
   }
-  function tick(now){
-    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
-    const dir = Math.sign(target - p);
-    p += dir * dt / RAMP;
-    if ((dir > 0 && p >= target) || (dir < 0 && p <= target) || dir === 0){
-      p = target; apply(); raf = 0; return;
+  function drawSparks(dt){
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'lighter';
+    const g = 900; // gravity px/s^2
+    for(let i=parts.length-1;i>=0;i--){
+      const p = parts[i];
+      p.age += dt;
+      if(p.age>=p.life){ parts.splice(i,1); continue; }
+      p.vy += g*dt; p.vx*=0.985;
+      const nx=p.x+p.vx*dt, ny=p.y+p.vy*dt;
+      const f = 1 - p.age/p.life;               // 1 hot -> 0 dead
+      // colour: white-hot -> yellow -> orange -> red
+      const r=255, gg=Math.round(90+165*f), b=Math.round(30*Math.max(0,f-0.4)*2.5);
+      ctx.strokeStyle = `rgba(${r},${gg},${b},${Math.min(1,f*1.4)})`;
+      ctx.lineWidth = p.w*(0.5+f);
+      ctx.lineCap='round';
+      ctx.beginPath();
+      const trail = p.long?2.4:1.3;
+      ctx.moveTo(p.x,p.y); ctx.lineTo(nx-p.vx*dt*trail, ny-p.vy*dt*trail);
+      ctx.stroke();
+      p.x=nx; p.y=ny;
     }
-    apply();
-    raf = requestAnimationFrame(tick);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  // ---- assembly easing driven by hover, unified with the spark loop ----
+  let p=0, target=0, raf=0, last=0, wasOn=null, burst=false;
+  function apply(){
+    mv.currentTime = easeInOut(p)*ASSEMBLE_T;
+    const on = p>0.5;
+    viewer.classList.toggle('assembled', on);
+    if(on!==wasOn){ wasOn=on; statusEl.textContent = on?'Assembled':'Exploded view'; }
+  }
+  function frame(now){
+    const dt = Math.min(0.05,(now-last)/1000||0); last=now;
+    const dir = Math.sign(target-p);
+    if(dir!==0){
+      const prev=p;
+      p += dir*dt/RAMP;
+      if((dir>0&&p>=target)||(dir<0&&p<=target)) p=target;
+      apply();
+      // sparks while coming together, ramping up as the joint closes
+      if(dir>0 && p>0.4 && !reduce){
+        const power = (p-0.4)/0.6;                 // 0..1
+        spawn(Math.round(1+power*7), 0.5+power);
+      }
+    }
+    // final shower when fully seated
+    if(dir>0 && p>=1 && !burst && !reduce){ burst=true; spawn(70,1.6); }
+    if(p<1) burst=false;
+
+    if(!reduce) drawSparks(dt);
+    if(dir!==0 || parts.length){ raf=requestAnimationFrame(frame); }
+    else { raf=0; ctx.clearRect(0,0,W,H); }
   }
   function goto(t){
-    target = t;
-    if (reduce){ p = t; apply(); return; }
-    if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
+    target=t;
+    if(reduce){ p=t; apply(); return; }
+    if(!raf){ last=performance.now(); raf=requestAnimationFrame(frame); }
   }
 
   function init(){
-    mv.animationName = 'construct';
-    try { mv.pause(); } catch (e) {}
-    p = reduce ? 1 : 0; target = p; apply();     // rest = exploded (or assembled if reduced motion)
-    if (reduce){ viewer.classList.add('assembled'); cueText.textContent = 'Assembled'; }
-    else cueText.textContent = coarse ? 'Tap to assemble' : 'Hover to assemble';
+    resize();
+    mv.animationName='construct';
+    try{ mv.pause(); }catch(e){}
+    p = reduce?1:0; target=p; apply();
+    if(reduce){ viewer.classList.add('assembled'); statusEl.textContent='Assembled'; }
   }
   mv.addEventListener('load', init);
 
-  if (coarse){
-    // Touch: tap toggles assemble / explode.
-    viewer.addEventListener('pointerup', () => {
-      const next = target > 0.5 ? 0 : 1;
-      goto(next);
-      cueText.textContent = next ? 'Tap to explode' : 'Tap to assemble';
-    });
-  } else {
-    viewer.addEventListener('pointerenter', () => goto(1));
-    viewer.addEventListener('pointerleave', () => goto(0));
-    // Keyboard accessibility: focusing the viewer assembles it.
-    mv.addEventListener('focus', () => goto(1));
-    mv.addEventListener('blur', () => goto(0));
+  if(coarse){
+    viewer.addEventListener('pointerup', ()=> goto(target>0.5?0:1));
+  }else{
+    viewer.addEventListener('pointerenter', ()=> goto(1));
+    viewer.addEventListener('pointerleave', ()=> goto(0));
+    mv.addEventListener('focus', ()=> goto(1));
+    mv.addEventListener('blur', ()=> goto(0));
   }
 
-  // Placeholder ☰ menu jumps to contact.
   document.querySelector('.menu-btn').addEventListener('click',
-    () => location.hash = '#contact');
+    ()=> location.hash='#contact');
+})();
 </script>
 </body>
 </html>
